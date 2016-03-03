@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentWorksSearch"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Авторизация" Height="200" Width="280" MaxWidth="280" MinWidth="280" MaxHeight="200" MinHeight="200">
     <Grid>
-        Проверка синхронизации github
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontSize="16">Авторизация в систему</TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="14">Логин:</TextBlock>
+        <TextBox Name="txtboxLogIn" Grid.Row="1" Grid.Column="1" Margin="15 10" FontSize="14"></TextBox>
+        <TextBlock Grid.Row="2" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="14">Пароль:</TextBlock>
+        <PasswordBox Grid.Row="2" Grid.Column="1" Margin="15 10" FontSize="14"></PasswordBox>
+        <Button Name="btnLogIn" Grid.Row="3" Grid.ColumnSpan="2" Margin="75 5" FontSize="14" Click="btnLogIn_Click">Войти</Button>
     </Grid>
 </Window>

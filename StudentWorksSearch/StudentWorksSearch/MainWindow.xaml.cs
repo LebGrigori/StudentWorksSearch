@@ -24,5 +24,21 @@ namespace StudentWorksSearch
         {
             InitializeComponent();
         }
+
+        private void btnLogIn_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtboxLogIn.Text == "1")
+            {
+                StudentForm win = new StudentForm();
+                win.Show();
+                this.Close();
+            }
+            else
+            {
+                TutorForm win = new TutorForm();
+                win.Show();
+                this.Close();
+            }
+        }
     }
 }
