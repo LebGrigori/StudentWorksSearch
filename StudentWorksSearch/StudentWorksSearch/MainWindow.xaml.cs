@@ -29,13 +29,7 @@ namespace StudentWorksSearch
         {
             if (txtboxLogIn.Text == "1")
             {
-                StudentForm win = new StudentForm();
-                win.Show();
-                this.Close();
-            }
-            else
-            {
-                TutorForm win = new TutorForm();
+                Search win = new Search();
                 win.Show();
                 this.Close();
             }
