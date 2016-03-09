@@ -33,6 +33,12 @@ namespace StudentWorksSearch
                 win.Show();
                 this.Close();
             }
+            else
+            {
+                Registration win = new Registration();
+                win.Show();
+                this.Close();
+            }
         }
     }
 }
