@@ -27,18 +27,26 @@ namespace StudentWorksSearch
 
         private void btnLogIn_Click(object sender, RoutedEventArgs e)
         {
-            if (txtboxLogIn.Text == "1")
-            {
-                Search win = new Search();
-                win.Show();
-                this.Close();
-            }
-            else
-            {
-                Registration win = new Registration();
-                win.Show();
-                this.Close();
-            }
+                var engine = new UserEngine(txtboxLogIn.Text, passboxPass.Password);
+                if (engine.LogInCheck())
+                {
+                    Search win = new Search();
+                    win.Show();
+                    this.Close();
+                }
+                else
+                {
+                    txtboxLogIn.Clear();
+                    passboxPass.Clear();
+                    lblError.Text = "Неверный логин или пароль!";
+                }
+        }
+
+        private void btnRegistration_Click(object sender, RoutedEventArgs e)
+        {
+            Registration win = new Registration();
+            win.Show();
+            this.Close();
         }
     }
 }
