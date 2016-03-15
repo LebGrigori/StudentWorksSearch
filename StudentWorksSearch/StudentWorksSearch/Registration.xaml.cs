@@ -61,7 +61,7 @@ namespace StudentWorksSearch
                 else
                     MessageBox.Show("Введеные не все данные!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Введеные не все данные!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
