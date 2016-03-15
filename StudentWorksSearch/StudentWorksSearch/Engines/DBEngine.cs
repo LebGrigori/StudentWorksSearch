@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,22 @@ namespace StudentWorksSearch.Engines
         public void GetFac()
         {
 
+        }
+
+        public void GetUserData(string username, out string UserData)
+        {
+            UserData = "";
+            var query =
+                      from USER in db.Users
+                      where USER.Login == username
+                      select new { USER.Login, USER.E_mail, USER.Registration, USER.Name, USER.University };
+
+            foreach (var user in query)
+            {
+                UserData = user.ToString();
+            }
+            UserData = UserData.Trim('{', '}');
+            UserData = UserData.Replace(",", "\n");
         }
 
     }

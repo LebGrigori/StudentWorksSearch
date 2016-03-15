@@ -21,16 +21,15 @@
             <MenuItem Header="Файл">
                 <MenuItem Header="Скачать работу"/>
                 <MenuItem Header="Добавить работу"/>
+                <MenuItem Header="Удалить работу"/>
                 <Separator/>
                 <MenuItem Header="Оценить работу"/>
             </MenuItem>
             <MenuItem Header="Обо мне">
-                <MenuItem Header="Мои данные"/>
-                <Separator/>
+                <MenuItem Name="btnMyData" Click="btnMyData_Click" Header="Мои данные"/>
                 <MenuItem Header="Редактировать информацию"/>
-                <MenuItem Header="Сменить пароль"/>
             </MenuItem>
-            <MenuItem Header="О программе"></MenuItem>
+            <MenuItem Name="btnAbout" Header="О программе" Click="btnAbout_Click"></MenuItem>
         </Menu>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
