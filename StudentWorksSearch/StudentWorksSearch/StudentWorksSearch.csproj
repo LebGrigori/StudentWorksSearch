@@ -87,8 +87,8 @@
     <Compile Include="Files.cs">
       <DependentUpon>SearchWorkDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="LuceneSearch\LuceneSearch.cs" />
-    <Compile Include="LuceneSearch\ObjectToIndex.cs" />
+    <Compile Include="LuceneSearch\LuceneEngine.cs" />
+    <Compile Include="LuceneSearch\Work.cs" />
     <Compile Include="Profile.cs">
       <DependentUpon>SearchWorkDB.tt</DependentUpon>
     </Compile>
