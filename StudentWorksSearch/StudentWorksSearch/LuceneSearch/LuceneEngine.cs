@@ -15,7 +15,10 @@ namespace StudentWorksSearch.LuceneSearch
 {
     public static class LuceneEngine
     {
-        //there is a place where to store the index--->> got to solve it!!!--->uppd: solved
+        //разобраться с серчером, там что то про изменения в индексе
+
+        //there is a place where to store the index--->> got to solve it!!!--->
+        //uppd: solved
         private static string _luceneDir = Path.Combine("../../../", "lucene_index1");
         private static FSDirectory _directoryTemp;
         private static FSDirectory _directory
@@ -31,7 +34,10 @@ namespace StudentWorksSearch.LuceneSearch
             }
         }
 
-
+        static StandardAnalyzer GetAnalyzer()
+        {
+            return new StandardAnalyzer(Version.LUCENE_30);
+        }
 
         //this method creates document from an ObjectToIndex
         //мб возвращать бул и отправлять его в бд? и надо решить с приватностью и репозиторием
@@ -48,7 +54,7 @@ namespace StudentWorksSearch.LuceneSearch
             {
                 using (IndexWriter idxw = new IndexWriter(_directory, std, true, IndexWriter.MaxFieldLength.UNLIMITED))
                 {
-                    //check if document exists
+                    //check if document exists, if true deletes existing
                     var searchQuery = new TermQuery(new Term("Id", work.Id.ToString()));
                     idxw.DeleteDocuments(searchQuery);
                     //creation
@@ -56,8 +62,8 @@ namespace StudentWorksSearch.LuceneSearch
                     doc.Add(new Field("Id", work.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));//аналайзер разбивает строки на слова
                     doc.Add(new Field("Title", work.Authors, Field.Store.YES, Field.Index.ANALYZED));
                     doc.Add(new Field("Description", work.Text, Field.Store.YES, Field.Index.ANALYZED));
-                    doc.Add(new Field("Authors", work.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));//аналайзер разбивает строки на слова
-                    doc.Add(new Field("Text", work.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));//аналайзер разбивает строки на слова
+                    doc.Add(new Field("Authors", work.Id.ToString(), Field.Store.YES, Field.Index.ANALYZED));//аналайзер разбивает строки на слова
+                    doc.Add(new Field("Text", work.Id.ToString(), Field.Store.YES, Field.Index.ANALYZED));//аналайзер разбивает строки на слова
                     //write the document to the index
                     idxw.AddDocument(doc);
                     //
@@ -66,6 +72,7 @@ namespace StudentWorksSearch.LuceneSearch
                     //
                     //
                     //optimize and close the writer
+                    idxw.Commit();
                     idxw.Optimize();
                 }
             }
@@ -73,19 +80,71 @@ namespace StudentWorksSearch.LuceneSearch
 
         //начнем с методов для англ, с русск пока сложнааа
 
-        //public static IEnumerable<Works> Search(string input, out int count, string fieldName = "")
-        //{
-        //    if (string.IsNullOrEmpty(input))
-        //    {
-        //        count = 0;
-        //        return new List<Works>();
-        //    }
-        //    //trim- удаляет пробелы с концов
-        //    var terms = input.Trim().Replace("-", " ").Split(' ')
-        //        .Where(x => !string.IsNullOrEmpty(x)).Select(x => x.Trim() + "*");
-        //    input = string.Join(" ", terms);
-        //    return _search(input, out count, fieldName);
-        //}
+        public static IEnumerable<Work> Search(string input, out int count, string fieldName = "")
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                count = 0;
+                return new List<Work>();
+            }
+            //trim- удаляет пробелы с концов
+            var terms = input.Trim().Replace("-", " ").Split(' ')
+                .Where(x => !string.IsNullOrEmpty(x)).Select(x => x.Trim() + "*");
+            input = string.Join(" ", terms);
+            return _search(input, out count, fieldName);
+        }
+
+        static IEnumerable<Work> _search(string keywords, out int count, string field = "")
+        {
+            if (string.IsNullOrEmpty(keywords.Replace("*", "").Replace("?", "")))
+            {
+                count = 0;
+                return new List<Work>();
+            }
+            using (var searcher = new IndexSearcher(_directory))
+            using (var analyzer = GetAnalyzer())
+            {
+                if (!string.IsNullOrEmpty(field))
+                {
+                    var parser = new QueryParser(Version.LUCENE_30, field, analyzer);
+                    var queryForField = parseQuery(keywords, parser);
+                    var docs = searcher.Search(queryForField, 1000);
+                    count = docs.TotalHits;
+                    var samples = _convertDocs(docs.ScoreDocs, searcher);
+                    searcher.Dispose();
+                    return samples;
+                }
+                else
+                {
+                    var parser = new MultiFieldQueryParser
+                        (Version.LUCENE_30, new[] { "Id", "Author", "Text" }, analyzer);
+                    var queryForField = parseQuery(keywords, parser);
+                    var docs = searcher.Search(queryForField, null, 1000, Sort.RELEVANCE);
+                    count = docs.TotalHits;
+                    var samples = _convertDocs(docs.ScoreDocs, searcher);
+                    searcher.Dispose();
+                    return samples;
+                }
+            }
+        }
+
+        static Query parseQuery(string searchQuery, QueryParser parser)
+        {
+            Query query;
+            try
+            {
+                query = parser.Parse(searchQuery.Trim());
+            }
+            catch (ParseException)
+            {
+                //make query with some symbols ignored
+                query = parser.Parse(QueryParser.Escape(searchQuery.Trim()));
+            }
+            return query;
+        }
+
+
+        //converting
 
         private static Work _convertDoc(Document doc)
         {
@@ -99,17 +158,31 @@ namespace StudentWorksSearch.LuceneSearch
             };
         }
 
-
-        private static IEnumerable<Work> _convertFDocs(IEnumerable<Document> found)
+        private static IEnumerable<Work> _convertDocs(IEnumerable<ScoreDoc> docs, IndexSearcher searcher)
         {
-            return found.Select(_convertDoc).ToList();
-        }
-        private static IEnumerable<Work> _convertDocs(IEnumerable<ScoreDoc> found,
-            IndexSearcher searcher)
-        {
-            return found.Select(oneFound => _convertDoc(searcher.Doc(oneFound.Doc))).ToList();
+            var samples = new List<Work>();
+            foreach (var doc in docs)
+            {
+                samples.Add(_convertDoc(searcher.Doc(doc.Doc)));
+            }
+            return samples;
         }
 
+        private static IEnumerable<Work> _convertDocs(IEnumerable<Document> docs)
+        {
+            var samples = new List<Work>();
+            foreach (var doc in docs)
+            {
+                samples.Add(_convertDoc(doc));
+            }
+            return samples;
+        }
+
+        public static int CountDocs()
+        {
+            var reader = IndexReader.Open(_directory, true);
+            return reader.NumDocs();
+        }
 
     }
 }
