@@ -27,7 +27,7 @@
             </MenuItem>
             <MenuItem Header="Обо мне">
                 <MenuItem Name="btnMyData" Click="btnMyData_Click" Header="Мои данные"/>
-                <MenuItem Header="Редактировать информацию"/>
+                <MenuItem Name="btnEdit" Click="btnEdit_Click" Header="Редактировать информацию"/>
             </MenuItem>
             <MenuItem Name="btnAbout" Header="О программе" Click="btnAbout_Click"></MenuItem>
         </Menu>

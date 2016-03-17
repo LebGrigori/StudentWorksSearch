@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,20 +38,20 @@ namespace StudentWorksSearch.Engines
 
         }
 
-        public void GetUserData(string username, out string UserData)
+        public static String Hash(String value)
         {
-            UserData = "";
-            var query =
-                      from USER in db.Users
-                      where USER.Login == username
-                      select new { USER.Login, USER.E_mail, USER.Registration, USER.Name, USER.University };
+            StringBuilder Sb = new StringBuilder();
 
-            foreach (var user in query)
+            using (SHA256 hash = SHA256Managed.Create())
             {
-                UserData = user.ToString();
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+
+                foreach (Byte b in result)
+                    Sb.Append(b.ToString("x2"));
             }
-            UserData = UserData.Trim('{', '}');
-            UserData = UserData.Replace(",", "\n");
+
+            return Sb.ToString();
         }
 
     }
