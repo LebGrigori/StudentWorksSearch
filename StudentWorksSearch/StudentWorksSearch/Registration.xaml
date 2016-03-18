@@ -25,14 +25,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="5" FontSize="16">Регистрация</TextBlock>
+        <TextBlock Name="lblHead" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="5" FontSize="16">Регистрация</TextBlock>
 
         <TextBlock Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="5 0 0 0 " FontSize="10">* - поля обязательные для заполения</TextBlock>
 
-        <TextBlock Grid.Row="2" HorizontalAlignment="Right" Margin="5">Логин: *</TextBlock>
+        <TextBlock Name="lblName" Grid.Row="2" HorizontalAlignment="Right" Margin="5">Логин: *</TextBlock>
         <TextBox Name="txtboxLogIn" Grid.Row="2" Grid.Column="1" Margin="5"></TextBox>
 
-        <TextBlock Grid.Row="3" HorizontalAlignment="Right" Margin="5">Пароль: *</TextBlock>
+        <TextBlock Name="lblPass" Grid.Row="3" HorizontalAlignment="Right" Margin="5">Пароль: *</TextBlock>
         <PasswordBox Name="passboxPass" Grid.Row="3" Grid.Column="1" Margin="5"></PasswordBox>
 
         <Line Grid.Row="4" Grid.ColumnSpan="2" X1="0" X2="255" Stroke="Black" StrokeThickness="4"/>
@@ -48,7 +48,7 @@
         <TextBlock Grid.Row="7" HorizontalAlignment="Right" Margin="5">Факультет:</TextBlock>
         <ComboBox Name="cmbboxFac" IsEnabled="False" Grid.Row="7" Grid.Column="1" Margin="5"></ComboBox>
 
-        <Button Name="btrReg" Grid.Row="8" Grid.ColumnSpan="2" Margin="50 0" Click="btrReg_Click">Зарегистрироваться</Button>
+        <Button Name="btnReg" Grid.Row="8" Grid.ColumnSpan="2" Margin="50 0" Click="btnReg_Click">Зарегистрироваться</Button>
 
     </Grid>
 </Window>

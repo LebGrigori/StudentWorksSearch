@@ -33,11 +33,15 @@ namespace StudentWorksSearch
         private void btnMyData_Click(object sender, RoutedEventArgs e)
         {
             var engine = new DBEngine();
-            string str = "";
-
-            engine.GetUserData("anmur", out str);
+            string str = "LogIn: " + Repository.User.Login + "\nE-Mail: " + Repository.User.E_mail + "\nФИО: " + Repository.User.Name + "\nРегистрация: " + Repository.User.Registration + "\nВУЗ: " + Repository.User.University;
        
             MessageBox.Show(str, "Мои данные", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            Repository.Edit = true;
+            new Registration().ShowDialog();
         }
     }
 }

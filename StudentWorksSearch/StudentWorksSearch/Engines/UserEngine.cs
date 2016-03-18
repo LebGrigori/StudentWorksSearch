@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using StudentWorksSearch.Repo;
 
 namespace StudentWorksSearch
 {
@@ -86,20 +87,35 @@ namespace StudentWorksSearch
                 result = false;
         }
 
-        public static String Hash(String value)
+        public void GetUserData()
         {
-            StringBuilder Sb = new StringBuilder();
+            var query =
+                      from USER in db.Users
+                      where USER.Login == _username
+                      select new { USER.Login, USER.E_mail, USER.Registration, USER.Name, USER.University };
 
-            using (SHA256 hash = SHA256Managed.Create())
+            foreach (var user in query)
             {
-                Encoding enc = Encoding.UTF8;
-                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+                Repository.User = new UserData(user.Login, user.E_mail, user.Name, user.Registration, user.University);
+            }
+        }
 
-                foreach (Byte b in result)
-                    Sb.Append(b.ToString("x2"));
+        public void UpdUserData(string Mail, string Name, string Uni, string Fac)
+        {
+            var query =
+                      from USER in db.Users
+                      where USER.Login == Repository.User.Login
+                      select USER;
+
+            foreach (Users user in query)
+            {
+                user.E_mail = Mail;
+                user.Name = Name;
+                user.University = Uni;
             }
 
-            return Sb.ToString();
+            db.SaveChanges();
+            GetUserData();
         }
 
     }

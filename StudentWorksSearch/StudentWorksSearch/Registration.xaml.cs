@@ -26,42 +26,73 @@ namespace StudentWorksSearch
 
             var engine = new DBEngine();
             cmbboxUni.ItemsSource = engine.GetUni();
+            if (Repository.Edit)
+            {
+                lblHead.Text = "Изменение данных";
+                btnReg.Content = "Сохранить";
+                txtboxLogIn.Text = Repository.User.Login;
+                txtboxLogIn.IsEnabled = false;
+                lblName.Foreground = Brushes.DimGray;
+                lblPass.Foreground = Brushes.DimGray;
+                passboxPass.IsEnabled = false;
+                txtboxMail.Text = Repository.User.E_mail;
+                txtboxName.Text = Repository.User.Name;
+                if (Repository.User.University != null)
+                {
+                    cmbboxUni.SelectedItem = Repository.User.University;
+                }
+            }
         }
 
-        private void btrReg_Click(object sender, RoutedEventArgs e)
+        private void btnReg_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (txtboxLogIn.Text != "" && txtboxMail.Text != "" && passboxPass.Password != "")
+                if (Repository.Edit == false)
                 {
-                    bool result;
-                    var engine = new UserEngine(txtboxLogIn.Text, passboxPass.Password);
-
-                    if (cmbboxUni.SelectedIndex != -1)
+                    if (txtboxLogIn.Text != "" && txtboxMail.Text != "" && passboxPass.Password != "")
                     {
-                        engine.AddUser(txtboxMail.Text, txtboxName.Text, cmbboxUni.SelectedItem.ToString(), "", out result);
+                        bool result;
+                        var engine = new UserEngine(txtboxLogIn.Text, passboxPass.Password);
+
+                        if (cmbboxUni.SelectedIndex != -1)
+                        {
+                            engine.AddUser(txtboxMail.Text, txtboxName.Text, cmbboxUni.SelectedItem.ToString(), "", out result);
+                        }
+                        else
+                        {
+                            engine.AddUser(txtboxMail.Text, txtboxName.Text, "", "", out result);
+                        }
+
+                        if (result)
+                        {
+                            engine.GetUserData();
+                            Search win = new Search();
+                            win.Show();
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Пользователь с таким логином уже существует!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                            txtboxLogIn.Clear();
+                        }
                     }
                     else
+                        MessageBox.Show("Введеные не все данные!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    if (txtboxLogIn.Text != "" && txtboxMail.Text != "")
                     {
-                        engine.AddUser(txtboxMail.Text, txtboxName.Text, "", "", out result);
-                    }
-
-                    if (result)
-                    {
-                        Search win = new Search();
-                        win.Show();
+                        var engine = new UserEngine(txtboxLogIn.Text, "");
+                        engine.UpdUserData(txtboxMail.Text, txtboxName.Text, cmbboxUni.SelectedItem.ToString(), "");
                         this.Close();
                     }
                     else
-                    {
-                        MessageBox.Show("Пользователь с таким логином уже существует!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-                        txtboxLogIn.Clear();
-                    }
+                        MessageBox.Show("Введеные не все данные!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                else
-                    MessageBox.Show("Введеные не все данные!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBox.Show("Введеные не все данные!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
