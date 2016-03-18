@@ -47,19 +47,21 @@ namespace StudentWorksSearch.LuceneSearch
         //uppd: с приватностью решено, что с бул?
         //uppd2: вызвать методы для result and index
         //uppd3: ANALYZER CHANGED
+        //uppd4: ANALYZER CHANGED--->MUST WORK
         public static void BuildIndex(Work work)
         {
             //
             //
             //здесь вызов метода для обновления index
-           // DBEngine db = new DBEngine();
-           // var indexQuery=from db.Files 
-            
+            // DBEngine db = new DBEngine();
+            // var indexQuery=from db.Files 
+
             //
 
             //
             //using (var std = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_30))
-            using (var analyzer= new Lucene.Net.Analysis.Snowball.SnowballAnalyzer(Version.LUCENE_30, "Russian"))
+            //using (var analyzer= new Lucene.Net.Analysis.Snowball.SnowballAnalyzer(Version.LUCENE_30, "Russian"))
+            using (var analyzer = new Lucene.Net.Analysis.Ru.RussianAnalyzer(Version.LUCENE_30))
             {
                 using (IndexWriter idxw = new IndexWriter(_directory, analyzer, true, IndexWriter.MaxFieldLength.UNLIMITED))
                 {
@@ -99,7 +101,7 @@ namespace StudentWorksSearch.LuceneSearch
             }
             //trim- удаляет пробелы с концов
             var terms = input.Trim().Replace("-", " ").Split(' ')
-                .Where(x => !string.IsNullOrEmpty(x)).Select(x => x.Trim() + "*");
+                .Where(x => !string.IsNullOrEmpty(x)).Select(x => x.Trim());
             input = string.Join(" ", terms);
             return _search(input, out count, fieldName);
         }
@@ -114,7 +116,8 @@ namespace StudentWorksSearch.LuceneSearch
             }
             using (var searcher = new IndexSearcher(_directory))
             //using (var analyzer = GetAnalyzer())
-            using (var analyzer=new Lucene.Net.Analysis.Snowball.SnowballAnalyzer(Version.LUCENE_30, "Russian"))
+            //using (var analyzer=new Lucene.Net.Analysis.Snowball.SnowballAnalyzer(Version.LUCENE_30, "Russian"))
+            using (var analyzer = new Lucene.Net.Analysis.Ru.RussianAnalyzer(Version.LUCENE_30))
             {
                 if (!string.IsNullOrEmpty(field))
                 {
@@ -129,7 +132,7 @@ namespace StudentWorksSearch.LuceneSearch
                 else
                 {
                     var parser = new MultiFieldQueryParser
-                        (Version.LUCENE_30, new[] { "Id", "Author", "Text" }, analyzer);
+                        (Version.LUCENE_30, new[] { "Title", "Authors", "Description", "Text", "Hashtags" }, analyzer);
                     var queryForField = parseQuery(keywords, parser);
                     var docs = searcher.Search(queryForField, null, 1000, Sort.RELEVANCE);
                     count = docs.TotalHits;
