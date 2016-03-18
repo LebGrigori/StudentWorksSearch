@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using StudentWorksSearch.Engines;
+using StudentWorksSearch.LuceneSearch;
 
 namespace StudentWorksSearch
 {
@@ -42,6 +43,17 @@ namespace StudentWorksSearch
         {
             Repository.Edit = true;
             new Registration().ShowDialog();
+        }
+
+       // все что понадобится и может быть связано с папкой  lucene
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            int number;//количество результатов
+            string field = "";
+            if (txtboxSearch.Text.StartsWith("#"))
+                field = "Hashtags";
+            var results= LuceneEngine.Search(txtboxSearch.Text, out number, field); //метод для получения коллекции Work, а где они указывают по какому полю искать? или не
+
         }
     }
 }

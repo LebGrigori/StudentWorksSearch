@@ -10,12 +10,15 @@ using Lucene.Net.Store;
 using Version = Lucene.Net.Util.Version;
 using System;
 using System.Collections.Generic;
+using StudentWorksSearch.Engines;
 
 namespace StudentWorksSearch.LuceneSearch
 {
     public static class LuceneEngine
     {
         //разобраться с серчером, там что то про изменения в индексе
+
+
 
         //there is a place where to store the index--->> got to solve it!!!--->
         //uppd: solved
@@ -43,16 +46,22 @@ namespace StudentWorksSearch.LuceneSearch
         //мб возвращать бул и отправлять его в бд? и надо решить с приватностью и репозиторием
         //uppd: с приватностью решено, что с бул?
         //uppd2: вызвать методы для result and index
+        //uppd3: ANALYZER CHANGED
         public static void BuildIndex(Work work)
         {
             //
             //
             //здесь вызов метода для обновления index
+           // DBEngine db = new DBEngine();
+           // var indexQuery=from db.Files 
+            
             //
+
             //
-            using (var std = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_30))
+            //using (var std = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_30))
+            using (var analyzer= new Lucene.Net.Analysis.Snowball.SnowballAnalyzer(Version.LUCENE_30, "Russian"))
             {
-                using (IndexWriter idxw = new IndexWriter(_directory, std, true, IndexWriter.MaxFieldLength.UNLIMITED))
+                using (IndexWriter idxw = new IndexWriter(_directory, analyzer, true, IndexWriter.MaxFieldLength.UNLIMITED))
                 {
                     //check if document exists, if true deletes existing
                     var searchQuery = new TermQuery(new Term("Id", work.Id.ToString()));
@@ -62,8 +71,9 @@ namespace StudentWorksSearch.LuceneSearch
                     doc.Add(new Field("Id", work.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));//аналайзер разбивает строки на слова
                     doc.Add(new Field("Title", work.Authors, Field.Store.YES, Field.Index.ANALYZED));
                     doc.Add(new Field("Description", work.Text, Field.Store.YES, Field.Index.ANALYZED));
-                    doc.Add(new Field("Authors", work.Id.ToString(), Field.Store.YES, Field.Index.ANALYZED));//аналайзер разбивает строки на слова
-                    doc.Add(new Field("Text", work.Id.ToString(), Field.Store.YES, Field.Index.ANALYZED));//аналайзер разбивает строки на слова
+                    doc.Add(new Field("Authors", work.Authors, Field.Store.YES, Field.Index.ANALYZED));
+                    doc.Add(new Field("Text", work.Text, Field.Store.YES, Field.Index.ANALYZED));
+                    doc.Add(new Field("Hashtags", work.Hashtags, Field.Store.YES, Field.Index.ANALYZED));
                     //write the document to the index
                     idxw.AddDocument(doc);
                     //
@@ -94,6 +104,7 @@ namespace StudentWorksSearch.LuceneSearch
             return _search(input, out count, fieldName);
         }
 
+        //ANALYZER CHANGED
         static IEnumerable<Work> _search(string keywords, out int count, string field = "")
         {
             if (string.IsNullOrEmpty(keywords.Replace("*", "").Replace("?", "")))
@@ -102,7 +113,8 @@ namespace StudentWorksSearch.LuceneSearch
                 return new List<Work>();
             }
             using (var searcher = new IndexSearcher(_directory))
-            using (var analyzer = GetAnalyzer())
+            //using (var analyzer = GetAnalyzer())
+            using (var analyzer=new Lucene.Net.Analysis.Snowball.SnowballAnalyzer(Version.LUCENE_30, "Russian"))
             {
                 if (!string.IsNullOrEmpty(field))
                 {
