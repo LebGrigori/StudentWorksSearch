@@ -109,7 +109,9 @@ namespace StudentWorksSearch.Engines
                 Authors = auth,
                 Uploader = Repository.User.Login,
                 University = Repository.User.University,
-                Name = name
+                Name = name,
+                Description = comm
+                
             });
             db.SaveChanges();
 
