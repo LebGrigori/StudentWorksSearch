@@ -60,11 +60,7 @@ namespace StudentWorksSearch
                 {
                     Uni = null;
                 }
-                //Вставить после обновления БД(сделать Name NULLable)
-                //if (Name == "")
-                //{
-                //    Name = null;
-                //}
+                
                 if (Fac == "")
                 {
                     Fac = null;
@@ -78,7 +74,7 @@ namespace StudentWorksSearch
                     Registration = DateTime.Now,
                     University = Uni,
                     E_mail = Mail
-                    //Здесь будет добавление факультета
+                    
                 });
                 db.SaveChanges();
                 result = true;

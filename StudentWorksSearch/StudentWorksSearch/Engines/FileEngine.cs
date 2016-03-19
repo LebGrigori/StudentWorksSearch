@@ -5,11 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Word;
+using System.Windows;
+using System.IO;
+using Microsoft.Win32;
 
 namespace StudentWorksSearch.Engines
 {
     class FileEngine
     {
+        SearchWorkEntities db = new SearchWorkEntities();
+
+
         public static string GetDocText(string docfile)
         {
             Object filename = docfile;
@@ -28,7 +34,7 @@ namespace StudentWorksSearch.Engines
             Object openAndRepair = Type.Missing;
             Object documentDirection = Type.Missing;
             Object noEncodingDialog = Type.Missing;
-            Application Progr = new Application();
+            Microsoft.Office.Interop.Word.Application Progr = new Microsoft.Office.Interop.Word.Application();
             Progr.Documents.Open(ref filename,
             ref confirmConversions,
             ref readOnly,
@@ -57,5 +63,58 @@ namespace StudentWorksSearch.Engines
             Progr.Quit(ref sch, ref aq, ref ab);
             return result;
         }
+
+        public void LoadFile()
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file.Filter = "Word Documents|*.doc;*.docx";
+            file.FilterIndex = 1;
+            
+                file.ShowDialog();
+                string str = new FileInfo(file.FileName).Name;
+                Repository.Path = Path.Combine("../../../Data", str);
+                File.Copy(file.FileName, Repository.Path);
+                Repository.Size = new FileInfo(Repository.Path).Length / 1024;
+            
+        }
+
+        public void AddFile(string name, int dis, string auth, string tags, string comm)
+        {
+            var file = new Files
+            {
+                Path = Repository.Path,
+                Size = Repository.Size
+            };
+            db.Files.Add(file);
+            db.SaveChanges();
+
+            if (auth == "")
+            {
+                auth = null;
+            }
+            if (tags == "")
+            {
+                tags = null;
+            }
+            if (comm == "")
+            {
+                comm = null;
+            }
+            db.Work.Add(new Work
+            {
+                Date = DateTime.Now,
+                Descipline = dis + 1,
+                Hashtags = tags,
+                Documet = file.Id,
+                Authors = auth,
+                Uploader = Repository.User.Login,
+                University = Repository.User.University,
+                Name = name
+            });
+            db.SaveChanges();
+
+
+        }
+
     }
 }

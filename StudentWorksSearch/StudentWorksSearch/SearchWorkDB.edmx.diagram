@@ -4,21 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ea7852da2d9d4a218b874bfc6dad0ab2" Name="Diagram1">
-        <EntityTypeShape EntityType="SearchWorkModel.Comments" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="SearchWorkModel.Discipline" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SearchWorkModel.Faculty" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SearchWorkModel.Files" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SearchWorkModel.Profile" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SearchWorkModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SearchWorkModel.University" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SearchWorkModel.Users" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SearchWorkModel.Work" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+      <Diagram DiagramId="1a8210c944ae4c58b123f7881e7bc202" Name="Diagram1">
+        <EntityTypeShape EntityType="SearchWorkModel.Comments" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SearchWorkModel.Discipline" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SearchWorkModel.Files" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SearchWorkModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SearchWorkModel.University" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SearchWorkModel.Users" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SearchWorkModel.Work" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
         <AssociationConnector Association="SearchWorkModel.R_39" ManuallyRouted="false" />
         <AssociationConnector Association="SearchWorkModel.R_40" ManuallyRouted="false" />
         <AssociationConnector Association="SearchWorkModel.R_14" ManuallyRouted="false" />
-        <AssociationConnector Association="SearchWorkModel.R_18" ManuallyRouted="false" />
-        <AssociationConnector Association="SearchWorkModel.R_19" ManuallyRouted="false" />
         <AssociationConnector Association="SearchWorkModel.R_30" ManuallyRouted="false" />
         <AssociationConnector Association="SearchWorkModel.R_34" ManuallyRouted="false" />
         <AssociationConnector Association="SearchWorkModel.R_42" ManuallyRouted="false" />

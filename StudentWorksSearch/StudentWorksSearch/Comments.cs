@@ -17,7 +17,7 @@ namespace StudentWorksSearch
         public string Author { get; set; }
         public int Work { get; set; }
         public string Comment { get; set; }
-        public Nullable<int> Scores { get; set; }
+        public int Scores { get; set; }
         public System.DateTime DateTime { get; set; }
     
         public virtual Users Users { get; set; }

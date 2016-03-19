@@ -125,9 +125,6 @@
     </Compile>
     <Compile Include="Engines\DBEngine.cs" />
     <Compile Include="Engines\FileEngine.cs" />
-    <Compile Include="Faculty.cs">
-      <DependentUpon>SearchWorkDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Files.cs">
       <DependentUpon>SearchWorkDB.tt</DependentUpon>
     </Compile>
@@ -136,9 +133,6 @@
     </Compile>
     <Compile Include="LuceneSearch\LuceneEngine.cs" />
     <Compile Include="LuceneSearch\Work.cs" />
-    <Compile Include="Profile.cs">
-      <DependentUpon>SearchWorkDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
@@ -147,6 +141,7 @@
     <Compile Include="Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Engines\UserEngine.cs" />
     <Compile Include="SearchWorkDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -168,7 +163,6 @@
     <Compile Include="University.cs">
       <DependentUpon>SearchWorkDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Engines\UserEngine.cs" />
     <Compile Include="Users.cs">
       <DependentUpon>SearchWorkDB.tt</DependentUpon>
     </Compile>
@@ -222,6 +216,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.Config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -235,21 +230,6 @@
     <None Include="SearchWorkDB.edmx.diagram">
       <DependentUpon>SearchWorkDB.edmx</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="SearchWorkDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SearchWorkDB.edmx</DependentUpon>
-      <LastGenOutput>SearchWorkDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="SearchWorkDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SearchWorkDB.edmx</DependentUpon>
-      <LastGenOutput>SearchWorkDB.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -282,6 +262,18 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SearchWorkDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SearchWorkDB.edmx</DependentUpon>
+      <LastGenOutput>SearchWorkDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SearchWorkDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SearchWorkDB.edmx</DependentUpon>
+      <LastGenOutput>SearchWorkDB.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

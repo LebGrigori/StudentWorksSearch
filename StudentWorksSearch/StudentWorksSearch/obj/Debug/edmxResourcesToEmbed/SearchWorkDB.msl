@@ -20,33 +20,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Faculty">
-      <EntityTypeMapping TypeName="SearchWorkModel.Faculty">
-        <MappingFragment StoreEntitySet="Faculty">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Profile" ColumnName="Profile" />
-          <ScalarProperty Name="University" ColumnName="University" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Files">
       <EntityTypeMapping TypeName="SearchWorkModel.Files">
         <MappingFragment StoreEntitySet="Files">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Path" ColumnName="Path" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
           <ScalarProperty Name="Size" ColumnName="Size" />
-          <ScalarProperty Name="Index" ColumnName="Index" />
-          <ScalarProperty Name="Result" ColumnName="Result" />
-          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Profile">
-      <EntityTypeMapping TypeName="SearchWorkModel.Profile">
-        <MappingFragment StoreEntitySet="Profile">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -93,6 +72,8 @@
           <ScalarProperty Name="Authors" ColumnName="Authors" />
           <ScalarProperty Name="Uploader" ColumnName="Uploader" />
           <ScalarProperty Name="University" ColumnName="University" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

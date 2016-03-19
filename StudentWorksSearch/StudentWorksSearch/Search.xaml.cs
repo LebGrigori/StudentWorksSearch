@@ -63,7 +63,7 @@ namespace StudentWorksSearch
 
         private void AddWork_Click(object sender, RoutedEventArgs e)
         {
-
+            new AddWork().ShowDialog();
         }
 
         private void DownloadWork_Click(object sender, RoutedEventArgs e)

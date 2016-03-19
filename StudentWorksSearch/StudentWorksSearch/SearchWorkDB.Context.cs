@@ -27,9 +27,7 @@ namespace StudentWorksSearch
     
         public virtual DbSet<Comments> Comments { get; set; }
         public virtual DbSet<Discipline> Discipline { get; set; }
-        public virtual DbSet<Faculty> Faculty { get; set; }
         public virtual DbSet<Files> Files { get; set; }
-        public virtual DbSet<Profile> Profile { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<University> University { get; set; }
         public virtual DbSet<Users> Users { get; set; }

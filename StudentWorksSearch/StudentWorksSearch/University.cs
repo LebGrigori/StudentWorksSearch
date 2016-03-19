@@ -17,7 +17,6 @@ namespace StudentWorksSearch
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public University()
         {
-            this.Faculty = new HashSet<Faculty>();
             this.Users = new HashSet<Users>();
             this.Work = new HashSet<Work>();
         }
@@ -25,8 +24,6 @@ namespace StudentWorksSearch
         public string Short_name { get; set; }
         public string Full_name { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Faculty> Faculty { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Users> Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

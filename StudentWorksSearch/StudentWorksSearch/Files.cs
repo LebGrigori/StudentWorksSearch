@@ -22,11 +22,7 @@ namespace StudentWorksSearch
     
         public int Id { get; set; }
         public string Path { get; set; }
-        public string Type { get; set; }
         public double Size { get; set; }
-        public Nullable<int> Index { get; set; }
-        public Nullable<int> Result { get; set; }
-        public Nullable<System.DateTime> CreationDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Work> Work { get; set; }

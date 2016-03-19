@@ -13,7 +13,7 @@
           <Property Name="Author" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Work" Type="int" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="255" />
-          <Property Name="Scores" Type="int" />
+          <Property Name="Scores" Type="int" Nullable="false" />
           <Property Name="DateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Discipline">
@@ -23,32 +23,13 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <EntityType Name="Faculty">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Profile" Type="int" />
-          <Property Name="University" Type="nvarchar" MaxLength="10" Nullable="false" />
-        </EntityType>
         <EntityType Name="Files">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Path" Type="nvarchar" MaxLength="60" Nullable="false" />
-          <Property Name="Type" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Size" Type="float" Nullable="false" />
-          <Property Name="Index" Type="int" />
-          <Property Name="Result" Type="int" />
-          <Property Name="CreationDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="Profile">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -72,9 +53,9 @@
             <PropertyRef Name="Login" />
           </Key>
           <Property Name="Login" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
-          <Property Name="Registration" Type="datetime" />
-          <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="60" />
+          <Property Name="Registration" Type="datetime" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="300" Nullable="false" />
           <Property Name="E_mail" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="University" Type="nvarchar" MaxLength="10" />
         </EntityType>
@@ -85,12 +66,14 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Descipline" Type="int" Nullable="false" />
-          <Property Name="Hashtags" Type="char" MaxLength="18" />
-          <Property Name="Plagiarism" Type="char" MaxLength="18" />
+          <Property Name="Hashtags" Type="nvarchar" MaxLength="300" />
+          <Property Name="Plagiarism" Type="float" />
           <Property Name="Documet" Type="int" Nullable="false" />
-          <Property Name="Authors" Type="char" MaxLength="18" />
+          <Property Name="Authors" Type="nvarchar" MaxLength="300" />
           <Property Name="Uploader" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="University" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="University" Type="nvarchar" MaxLength="10" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <Association Name="R_14">
           <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
@@ -101,30 +84,6 @@
             </Principal>
             <Dependent Role="Work">
               <PropertyRef Name="Descipline" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="R_18">
-          <End Role="Profile" Type="Self.Profile" Multiplicity="0..1" />
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Profile">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Faculty">
-              <PropertyRef Name="Profile" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="R_19">
-          <End Role="University" Type="Self.University" Multiplicity="1" />
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="University">
-              <PropertyRef Name="Short_name" />
-            </Principal>
-            <Dependent Role="Faculty">
-              <PropertyRef Name="University" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -189,7 +148,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="R_42">
-          <End Role="University" Type="Self.University" Multiplicity="1" />
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
           <End Role="Work" Type="Self.Work" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="University">
@@ -203,9 +162,7 @@
         <EntityContainer Name="SearchWorkModelStoreContainer">
           <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Discipline" EntityType="Self.Discipline" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="University" EntityType="Self.University" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -213,14 +170,6 @@
           <AssociationSet Name="R_14" Association="Self.R_14">
             <End Role="Discipline" EntitySet="Discipline" />
             <End Role="Work" EntitySet="Work" />
-          </AssociationSet>
-          <AssociationSet Name="R_18" Association="Self.R_18">
-            <End Role="Profile" EntitySet="Profile" />
-            <End Role="Faculty" EntitySet="Faculty" />
-          </AssociationSet>
-          <AssociationSet Name="R_19" Association="Self.R_19">
-            <End Role="University" EntitySet="University" />
-            <End Role="Faculty" EntitySet="Faculty" />
           </AssociationSet>
           <AssociationSet Name="R_30" Association="Self.R_30">
             <End Role="Files" EntitySet="Files" />
@@ -260,7 +209,7 @@
           <Property Name="Author" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Work" Type="Int32" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Scores" Type="Int32" />
+          <Property Name="Scores" Type="Int32" Nullable="false" />
           <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Users" Relationship="Self.R_39" FromRole="Comments" ToRole="Users" />
           <NavigationProperty Name="Work1" Relationship="Self.R_40" FromRole="Comments" ToRole="Work" />
@@ -273,36 +222,14 @@
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Work" Relationship="Self.R_14" FromRole="Discipline" ToRole="Work" />
         </EntityType>
-        <EntityType Name="Faculty">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Profile" Type="Int32" />
-          <Property Name="University" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Profile1" Relationship="Self.R_18" FromRole="Faculty" ToRole="Profile" />
-          <NavigationProperty Name="University1" Relationship="Self.R_19" FromRole="Faculty" ToRole="University" />
-        </EntityType>
         <EntityType Name="Files">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Path" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Size" Type="Double" Nullable="false" />
-          <Property Name="Index" Type="Int32" />
-          <Property Name="Result" Type="Int32" />
-          <Property Name="CreationDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Work" Relationship="Self.R_30" FromRole="Files" ToRole="Work" />
-        </EntityType>
-        <EntityType Name="Profile">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Faculty" Relationship="Self.R_18" FromRole="Profile" ToRole="Faculty" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -320,7 +247,6 @@
           </Key>
           <Property Name="Short_name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Full_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Faculty" Relationship="Self.R_19" FromRole="University" ToRole="Faculty" />
           <NavigationProperty Name="Users" Relationship="Self.R_34" FromRole="University" ToRole="Users" />
           <NavigationProperty Name="Work" Relationship="Self.R_42" FromRole="University" ToRole="Work" />
         </EntityType>
@@ -329,9 +255,9 @@
             <PropertyRef Name="Login" />
           </Key>
           <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Registration" Type="DateTime" Precision="3" />
-          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Registration" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="E_mail" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="University" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Comments" Relationship="Self.R_39" FromRole="Users" ToRole="Comments" />
@@ -345,12 +271,14 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Descipline" Type="Int32" Nullable="false" />
-          <Property Name="Hashtags" Type="String" MaxLength="18" FixedLength="true" Unicode="false" />
-          <Property Name="Plagiarism" Type="String" MaxLength="18" FixedLength="true" Unicode="false" />
+          <Property Name="Hashtags" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Plagiarism" Type="Double" />
           <Property Name="Documet" Type="Int32" Nullable="false" />
-          <Property Name="Authors" Type="String" MaxLength="18" FixedLength="true" Unicode="false" />
+          <Property Name="Authors" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="Uploader" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="University" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="University" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Comments" Relationship="Self.R_40" FromRole="Work" ToRole="Comments" />
           <NavigationProperty Name="Discipline" Relationship="Self.R_14" FromRole="Work" ToRole="Discipline" />
           <NavigationProperty Name="Files" Relationship="Self.R_30" FromRole="Work" ToRole="Files" />
@@ -393,30 +321,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="R_18">
-          <End Role="Profile" Type="Self.Profile" Multiplicity="0..1" />
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Profile">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Faculty">
-              <PropertyRef Name="Profile" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="R_19">
-          <End Role="University" Type="Self.University" Multiplicity="1" />
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="University">
-              <PropertyRef Name="Short_name" />
-            </Principal>
-            <Dependent Role="Faculty">
-              <PropertyRef Name="University" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="R_30">
           <End Role="Files" Type="Self.Files" Multiplicity="1" />
           <End Role="Work" Type="Self.Work" Multiplicity="*" />
@@ -442,7 +346,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="R_42">
-          <End Role="University" Type="Self.University" Multiplicity="1" />
+          <End Role="University" Type="Self.University" Multiplicity="0..1" />
           <End Role="Work" Type="Self.Work" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="University">
@@ -468,9 +372,7 @@
         <EntityContainer Name="SearchWorkEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Comments" EntityType="Self.Comments" />
           <EntitySet Name="Discipline" EntityType="Self.Discipline" />
-          <EntitySet Name="Faculty" EntityType="Self.Faculty" />
           <EntitySet Name="Files" EntityType="Self.Files" />
-          <EntitySet Name="Profile" EntityType="Self.Profile" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="University" EntityType="Self.University" />
           <EntitySet Name="Users" EntityType="Self.Users" />
@@ -486,14 +388,6 @@
           <AssociationSet Name="R_14" Association="Self.R_14">
             <End Role="Discipline" EntitySet="Discipline" />
             <End Role="Work" EntitySet="Work" />
-          </AssociationSet>
-          <AssociationSet Name="R_18" Association="Self.R_18">
-            <End Role="Profile" EntitySet="Profile" />
-            <End Role="Faculty" EntitySet="Faculty" />
-          </AssociationSet>
-          <AssociationSet Name="R_19" Association="Self.R_19">
-            <End Role="University" EntitySet="University" />
-            <End Role="Faculty" EntitySet="Faculty" />
           </AssociationSet>
           <AssociationSet Name="R_30" Association="Self.R_30">
             <End Role="Files" EntitySet="Files" />
@@ -537,33 +431,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Faculty">
-            <EntityTypeMapping TypeName="SearchWorkModel.Faculty">
-              <MappingFragment StoreEntitySet="Faculty">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Profile" ColumnName="Profile" />
-                <ScalarProperty Name="University" ColumnName="University" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Files">
             <EntityTypeMapping TypeName="SearchWorkModel.Files">
               <MappingFragment StoreEntitySet="Files">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Path" ColumnName="Path" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="Index" ColumnName="Index" />
-                <ScalarProperty Name="Result" ColumnName="Result" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Profile">
-            <EntityTypeMapping TypeName="SearchWorkModel.Profile">
-              <MappingFragment StoreEntitySet="Profile">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -610,6 +483,8 @@
                 <ScalarProperty Name="Authors" ColumnName="Authors" />
                 <ScalarProperty Name="Uploader" ColumnName="Uploader" />
                 <ScalarProperty Name="University" ColumnName="University" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

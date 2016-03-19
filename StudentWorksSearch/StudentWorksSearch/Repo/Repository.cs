@@ -22,5 +22,20 @@ namespace StudentWorksSearch
             get { return edit; }
             set { edit = value; }
         }
+
+        private static string path; 
+        public static string Path
+        {
+            get { return path; }
+            set { path = value; }
+        }
+
+        private static double size;
+        public static double Size
+        {
+            get { return size; }
+            set { size = value; }
+        }
+
     }
 }

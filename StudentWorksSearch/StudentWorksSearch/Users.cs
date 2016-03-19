@@ -23,7 +23,7 @@ namespace StudentWorksSearch
     
         public string Login { get; set; }
         public string Name { get; set; }
-        public Nullable<System.DateTime> Registration { get; set; }
+        public System.DateTime Registration { get; set; }
         public string Password { get; set; }
         public string E_mail { get; set; }
         public string University { get; set; }

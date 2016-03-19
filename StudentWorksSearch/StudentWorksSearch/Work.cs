@@ -24,11 +24,13 @@ namespace StudentWorksSearch
         public System.DateTime Date { get; set; }
         public int Descipline { get; set; }
         public string Hashtags { get; set; }
-        public string Plagiarism { get; set; }
+        public Nullable<double> Plagiarism { get; set; }
         public int Documet { get; set; }
         public string Authors { get; set; }
         public string Uploader { get; set; }
         public string University { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comments> Comments { get; set; }
