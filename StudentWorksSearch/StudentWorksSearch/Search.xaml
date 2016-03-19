@@ -19,9 +19,9 @@
 
         <Menu>
             <MenuItem Header="Файл">
-                <MenuItem Header="Скачать работу"/>
-                <MenuItem Header="Добавить работу"/>
-                <MenuItem Header="Удалить работу"/>
+                <MenuItem Header="Скачать работу" Name="DownloadWork" Click="DownloadWork_Click"/>
+                <MenuItem Header="Добавить работу" Name="AddWork" Click="AddWork_Click"/>
+                <MenuItem Header="Удалить работу" Name="DeleteWork" Click="DeleteWork_Click"/>
                 <Separator/>
                 <MenuItem Header="Оценить работу"/>
             </MenuItem>

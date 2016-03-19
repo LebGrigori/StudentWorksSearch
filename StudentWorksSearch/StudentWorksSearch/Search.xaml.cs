@@ -55,5 +55,20 @@ namespace StudentWorksSearch
             var results= LuceneEngine.Search(txtboxSearch.Text, out number, field); //метод для получения коллекции Work, а где они указывают по какому полю искать? или не
 
         }
+
+        private void DeleteWork_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddWork_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DownloadWork_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

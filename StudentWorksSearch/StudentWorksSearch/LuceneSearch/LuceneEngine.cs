@@ -132,7 +132,7 @@ namespace StudentWorksSearch.LuceneSearch
                 else
                 {
                     var parser = new MultiFieldQueryParser
-                        (Version.LUCENE_30, new[] { "Title", "Authors", "Description", "Text", "Hashtags" }, analyzer);
+                        (Version.LUCENE_30, new[] { "Title", "Authors", "Description", "Text" }, analyzer);
                     var queryForField = parseQuery(keywords, parser);
                     var docs = searcher.Search(queryForField, null, 1000, Sort.RELEVANCE);
                     count = docs.TotalHits;
@@ -193,10 +193,24 @@ namespace StudentWorksSearch.LuceneSearch
             return samples;
         }
 
+
+        //count all documents in indexrr
         public static int CountDocs()
         {
             var reader = IndexReader.Open(_directory, true);
             return reader.NumDocs();
+        }
+
+        //deleting index
+        public static void DeleteIndex(int id)
+        {
+            using (var analyzer = new Lucene.Net.Analysis.Ru.RussianAnalyzer(Version.LUCENE_30))
+            using (var writer = new IndexWriter(_directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED))
+            {
+                var searchQuery = new TermQuery(new Term("Id", id.ToString()));
+                writer.DeleteDocuments(searchQuery);
+                writer.Commit();
+            }
         }
 
     }
