@@ -114,9 +114,11 @@ namespace StudentWorksSearch.Engines
                 
             });
             db.SaveChanges();
-
-
         }
 
+        public void Save()
+        {
+            OpenFileDialog file = new OpenFileDialog();
+        }
     }
 }
