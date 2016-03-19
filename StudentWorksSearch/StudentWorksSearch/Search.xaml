@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentWorksSearch"
         mc:Ignorable="d"
-        Title="Поиск работы" Height="465" MinHeight="465" MinWidth="312" Width="312">
+        Title="Поиск работы" Height="465" MinHeight="465" MaxHeight="465" MinWidth="312" Width="312">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

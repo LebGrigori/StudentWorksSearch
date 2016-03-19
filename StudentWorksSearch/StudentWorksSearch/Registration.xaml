@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentWorksSearch"
         mc:Ignorable="d"
-        Title="Регистрация" Height="255" MaxHeight="255" MinHeight="255" Width="250" MaxWidth="250" MinWidth="250">
+        Title="Мои данные" Height="255" MaxHeight="255" MinHeight="255" Width="250" MaxWidth="250" MinWidth="250">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -35,7 +35,7 @@
         <TextBlock Name="lblPass" Grid.Row="3" HorizontalAlignment="Right" Margin="5">Пароль: *</TextBlock>
         <PasswordBox Name="passboxPass" Grid.Row="3" Grid.Column="1" Margin="5"></PasswordBox>
 
-        <Line Grid.Row="4" Grid.ColumnSpan="2" X1="0" X2="255" Stroke="Black" StrokeThickness="4"/>
+        <Line Grid.Row="4" Grid.ColumnSpan="2" X1="0" X2="255" Stroke="CornflowerBlue" StrokeThickness="4" />
         <TextBlock Grid.Row="4" HorizontalAlignment="Right" Margin="5">E-mail: *</TextBlock>
         <TextBox Name="txtboxMail" Grid.Row="4" Grid.Column="2" Margin="5"></TextBox>
 
