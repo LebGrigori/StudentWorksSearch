@@ -32,10 +32,12 @@
             <MenuItem Name="btnAbout" Header="О программе" Click="btnAbout_Click"></MenuItem>
         </Menu>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-            <TextBox  Name="txtboxSearch" Width="225" HorizontalAlignment="Stretch"></TextBox>
-            <Button Name="btnSearch" Width="50" Height="23" VerticalAlignment="Bottom" Click="btnSearch_Click">Поиск</Button>
-        </StackPanel>
+        <Border Grid.Row="1" Background="CornflowerBlue">
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                <TextBox  Name="txtboxSearch" Width="225" HorizontalAlignment="Stretch"></TextBox>
+                <Button Name="btnSearch" Width="50" Height="23" VerticalAlignment="Bottom" Click="btnSearch_Click">Поиск</Button>
+            </StackPanel>
+        </Border>
 
         <ListBox Name="lstboxResult" Grid.Row="2" Margin="5" ></ListBox>
 

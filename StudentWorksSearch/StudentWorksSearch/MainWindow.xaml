@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentWorksSearch"
         mc:Ignorable="d"
-        Title="Авторизация" Height="210" Width="280" MaxWidth="280" MinWidth="280" MaxHeight="210" MinHeight="210">
+        Title="Авторизация" Height="210" Width="270" MaxWidth="270" MinWidth="270" MaxHeight="210" MinHeight="210">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -19,7 +19,10 @@
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontSize="16">Авторизация в систему</TextBlock>
+        <Border Grid.ColumnSpan="2" Background="CornflowerBlue">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16">Авторизация в систему</TextBlock>
+        </Border>
+        
         <TextBlock Grid.Row="1" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="14">Логин:</TextBlock>
         <TextBox Name="txtboxLogIn" Grid.Row="1" Grid.Column="1" Margin="15 10" FontSize="14"></TextBox>
         <TextBlock Grid.Row="2" HorizontalAlignment="Right"  VerticalAlignment="Center" FontSize="14">Пароль:</TextBlock>
@@ -27,7 +30,7 @@
 
         <TextBlock Name="lblError" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="11" Foreground="Red"></TextBlock>
 
-        <StackPanel Grid.Row="4" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="5" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="4" Orientation="Horizontal" Grid.ColumnSpan="2" Margin="22 5" HorizontalAlignment="Right">
             <Button Name="btnLogIn" Margin="20 3 2 3" FontSize="14" Width="90" Click="btnLogIn_Click">Войти</Button>
             <Button Name="btnRegistration" Margin="2 3 20 3" FontSize="14" Width="90" Click="btnRegistration_Click">Регистрация</Button>
         </StackPanel>
