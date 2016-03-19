@@ -18,10 +18,8 @@ namespace StudentWorksSearch.LuceneSearch
     {
         //разобраться с серчером, там что то про изменения в индексе
 
-
-
-        //there is a place where to store the index--->> got to solve it!!!--->
-        //uppd: solved
+        //this part taken from http://www.codeproject.com/Articles/320219/Lucene-Net-ultra-fast-search-for-MVC-or-WebForms
+        //START
         private static string _luceneDir = Path.Combine("../../../", "lucene_index1");
         private static FSDirectory _directoryTemp;
         private static FSDirectory _directory
@@ -36,31 +34,11 @@ namespace StudentWorksSearch.LuceneSearch
                 return _directoryTemp;
             }
         }
-
-        static StandardAnalyzer GetAnalyzer()
-        {
-            return new StandardAnalyzer(Version.LUCENE_30);
-        }
+        //END
 
         //this method creates document from an ObjectToIndex
-        //мб возвращать бул и отправлять его в бд? и надо решить с приватностью и репозиторием
-        //uppd: с приватностью решено, что с бул?
-        //uppd2: вызвать методы для result and index
-        //uppd3: ANALYZER CHANGED
-        //uppd4: ANALYZER CHANGED--->MUST WORK
         public static void BuildIndex(Work work)
         {
-            //
-            //
-            //здесь вызов метода для обновления index
-            // DBEngine db = new DBEngine();
-            // var indexQuery=from db.Files 
-
-            //
-
-            //
-            //using (var std = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_30))
-            //using (var analyzer= new Lucene.Net.Analysis.Snowball.SnowballAnalyzer(Version.LUCENE_30, "Russian"))
             using (var analyzer = new Lucene.Net.Analysis.Ru.RussianAnalyzer(Version.LUCENE_30))
             {
                 using (IndexWriter idxw = new IndexWriter(_directory, analyzer, true, IndexWriter.MaxFieldLength.UNLIMITED))
@@ -78,19 +56,13 @@ namespace StudentWorksSearch.LuceneSearch
                     doc.Add(new Field("Hashtags", work.Hashtags, Field.Store.YES, Field.Index.ANALYZED));
                     //write the document to the index
                     idxw.AddDocument(doc);
-                    //
-                    //
-                    //здесь вызов метода для обновления result
-                    //
-                    //
+
                     //optimize and close the writer
                     idxw.Commit();
                     idxw.Optimize();
                 }
             }
         }
-
-        //начнем с методов для англ, с русск пока сложнааа
 
         public static IEnumerable<Work> Search(string input, out int count, string fieldName = "")
         {
@@ -99,14 +71,18 @@ namespace StudentWorksSearch.LuceneSearch
                 count = 0;
                 return new List<Work>();
             }
-            //trim- удаляет пробелы с концов
-            var terms = input.Trim().Replace("-", " ").Split(' ')
-                .Where(x => !string.IsNullOrEmpty(x)).Select(x => x.Trim());
+            //trim- удаляет пробелы, * просто мешает мне лично жить(мешает стеммеры приходить к исходной морфологической форме)
+            var terms = input.Replace("-", " ").Replace("*", "").Split(' ');
+            for (int i = 0; i < terms.Count(); i++)
+            {
+                terms[i] = terms[i].Trim();
+            }
             input = string.Join(" ", terms);
             return _search(input, out count, fieldName);
         }
 
-        //ANALYZER CHANGED
+        //partially taken from http://www.codeproject.com/Articles/320219/Lucene-Net-ultra-fast-search-for-MVC-or-WebForms
+        //START
         static IEnumerable<Work> _search(string keywords, out int count, string field = "")
         {
             if (string.IsNullOrEmpty(keywords.Replace("*", "").Replace("?", "")))
@@ -115,15 +91,13 @@ namespace StudentWorksSearch.LuceneSearch
                 return new List<Work>();
             }
             using (var searcher = new IndexSearcher(_directory))
-            //using (var analyzer = GetAnalyzer())
-            //using (var analyzer=new Lucene.Net.Analysis.Snowball.SnowballAnalyzer(Version.LUCENE_30, "Russian"))
             using (var analyzer = new Lucene.Net.Analysis.Ru.RussianAnalyzer(Version.LUCENE_30))
             {
                 if (!string.IsNullOrEmpty(field))
                 {
                     var parser = new QueryParser(Version.LUCENE_30, field, analyzer);
                     var queryForField = parseQuery(keywords, parser);
-                    var docs = searcher.Search(queryForField, 1000);
+                    var docs = searcher.Search(queryForField, 100);
                     count = docs.TotalHits;
                     var samples = _convertDocs(docs.ScoreDocs, searcher);
                     searcher.Dispose();
@@ -134,7 +108,7 @@ namespace StudentWorksSearch.LuceneSearch
                     var parser = new MultiFieldQueryParser
                         (Version.LUCENE_30, new[] { "Title", "Authors", "Description", "Text" }, analyzer);
                     var queryForField = parseQuery(keywords, parser);
-                    var docs = searcher.Search(queryForField, null, 1000, Sort.RELEVANCE);
+                    var docs = searcher.Search(queryForField, null, 100, Sort.RELEVANCE);
                     count = docs.TotalHits;
                     var samples = _convertDocs(docs.ScoreDocs, searcher);
                     searcher.Dispose();
@@ -142,6 +116,7 @@ namespace StudentWorksSearch.LuceneSearch
                 }
             }
         }
+        
 
         static Query parseQuery(string searchQuery, QueryParser parser)
         {
@@ -157,10 +132,10 @@ namespace StudentWorksSearch.LuceneSearch
             }
             return query;
         }
+        //END
 
 
         //converting
-
         private static Work _convertDoc(Document doc)
         {
             return new Work
