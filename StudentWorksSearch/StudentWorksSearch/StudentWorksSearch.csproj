@@ -114,6 +114,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddWork.xaml.cs">
+      <DependentUpon>AddWork.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Comments.cs">
       <DependentUpon>SearchWorkDB.tt</DependentUpon>
     </Compile>
@@ -127,6 +130,9 @@
     </Compile>
     <Compile Include="Files.cs">
       <DependentUpon>SearchWorkDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GradeWork.xaml.cs">
+      <DependentUpon>GradeWork.xaml</DependentUpon>
     </Compile>
     <Compile Include="LuceneSearch\LuceneEngine.cs" />
     <Compile Include="LuceneSearch\Work.cs" />
@@ -169,6 +175,14 @@
     <Compile Include="Work.cs">
       <DependentUpon>SearchWorkDB.tt</DependentUpon>
     </Compile>
+    <Page Include="AddWork.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GradeWork.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
