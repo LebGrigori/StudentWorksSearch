@@ -17,6 +17,7 @@ namespace StudentWorksSearch.LuceneSearch
     public static class LuceneEngine
     {
         //разобраться с серчером, там что то про изменения в индексе
+        //фхффххфхффхфхххф
 
         //this part taken from http://www.codeproject.com/Articles/320219/Lucene-Net-ultra-fast-search-for-MVC-or-WebForms
         //START
