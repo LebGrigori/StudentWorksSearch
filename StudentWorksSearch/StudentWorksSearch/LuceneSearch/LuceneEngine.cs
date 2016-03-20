@@ -14,7 +14,7 @@ using StudentWorksSearch.Engines;
 
 namespace StudentWorksSearch.LuceneSearch
 {
-    public static class LuceneEngine
+    public  class LuceneEngine
     {
         //разобраться с серчером, там что то про изменения в индексе
 
@@ -50,8 +50,8 @@ namespace StudentWorksSearch.LuceneSearch
                     //creation
                     Document doc = new Document();
                     doc.Add(new Field("Id", file.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));//аналайзер разбивает строки на слова
-                    doc.Add(new Field("Title", file.Authors, Field.Store.YES, Field.Index.ANALYZED));
-                    doc.Add(new Field("Description", file.Text, Field.Store.YES, Field.Index.ANALYZED));
+                    doc.Add(new Field("Title", file.Title, Field.Store.YES, Field.Index.ANALYZED));
+                    doc.Add(new Field("Description", file.Description, Field.Store.YES, Field.Index.ANALYZED));
                     doc.Add(new Field("Authors", file.Authors, Field.Store.YES, Field.Index.ANALYZED));
                     doc.Add(new Field("Text", file.Text, Field.Store.YES, Field.Index.ANALYZED));
                     doc.Add(new Field("Hashtags", file.Hashtags, Field.Store.YES, Field.Index.ANALYZED));
