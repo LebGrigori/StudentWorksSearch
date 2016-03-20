@@ -78,7 +78,7 @@ namespace StudentWorksSearch.Engines
             
         }
 
-        public void AddFile(string name, int dis, string auth, string tags, string comm)
+        public LuceneSearch.FileToIndex AddFile(string name, int dis, string auth, string tags, string comm)
         {
             var file = new Files
             {
@@ -114,6 +114,15 @@ namespace StudentWorksSearch.Engines
                 
             });
             db.SaveChanges();
+            return new LuceneSearch.FileToIndex
+            {
+                Id = file.Id,
+                Text = GetDocText(Repository.Path),
+                Description = comm,
+                Authors = auth,
+                Title = name,
+                Hashtags = tags
+            };
         }
 
         public void Save()

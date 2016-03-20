@@ -17,7 +17,7 @@ namespace StudentWorksSearch.LuceneSearch
     public static class LuceneEngine
     {
         //разобраться с серчером, там что то про изменения в индексе
-        //фхффххфхффхфхххф
+
 
         //this part taken from http://www.codeproject.com/Articles/320219/Lucene-Net-ultra-fast-search-for-MVC-or-WebForms
         //START
@@ -38,23 +38,23 @@ namespace StudentWorksSearch.LuceneSearch
         //END
 
         //this method creates document from an ObjectToIndex
-        public static void BuildIndex(Work work)
+        public static void BuildIndex(FileToIndex file)
         {
             using (var analyzer = new Lucene.Net.Analysis.Ru.RussianAnalyzer(Version.LUCENE_30))
             {
                 using (IndexWriter idxw = new IndexWriter(_directory, analyzer, true, IndexWriter.MaxFieldLength.UNLIMITED))
                 {
                     //check if document exists, if true deletes existing
-                    var searchQuery = new TermQuery(new Term("Id", work.Id.ToString()));
+                    var searchQuery = new TermQuery(new Term("Id", file.Id.ToString()));
                     idxw.DeleteDocuments(searchQuery);
                     //creation
                     Document doc = new Document();
-                    doc.Add(new Field("Id", work.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));//аналайзер разбивает строки на слова
-                    doc.Add(new Field("Title", work.Authors, Field.Store.YES, Field.Index.ANALYZED));
-                    doc.Add(new Field("Description", work.Text, Field.Store.YES, Field.Index.ANALYZED));
-                    doc.Add(new Field("Authors", work.Authors, Field.Store.YES, Field.Index.ANALYZED));
-                    doc.Add(new Field("Text", work.Text, Field.Store.YES, Field.Index.ANALYZED));
-                    doc.Add(new Field("Hashtags", work.Hashtags, Field.Store.YES, Field.Index.ANALYZED));
+                    doc.Add(new Field("Id", file.Id.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));//аналайзер разбивает строки на слова
+                    doc.Add(new Field("Title", file.Authors, Field.Store.YES, Field.Index.ANALYZED));
+                    doc.Add(new Field("Description", file.Text, Field.Store.YES, Field.Index.ANALYZED));
+                    doc.Add(new Field("Authors", file.Authors, Field.Store.YES, Field.Index.ANALYZED));
+                    doc.Add(new Field("Text", file.Text, Field.Store.YES, Field.Index.ANALYZED));
+                    doc.Add(new Field("Hashtags", file.Hashtags, Field.Store.YES, Field.Index.ANALYZED));
                     //write the document to the index
                     idxw.AddDocument(doc);
 
@@ -65,12 +65,12 @@ namespace StudentWorksSearch.LuceneSearch
             }
         }
 
-        public static IEnumerable<Work> Search(string input, out int count, string fieldName = "")
+        public static IEnumerable<FileToIndex> Search(string input, out int count, string fieldName = "")
         {
             if (string.IsNullOrEmpty(input))
             {
                 count = 0;
-                return new List<Work>();
+                return new List<FileToIndex>();
             }
             //trim- удаляет пробелы, * просто мешает мне лично жить(мешает стеммеры приходить к исходной морфологической форме)
             var terms = input.Replace("-", " ").Replace("*", "").Split(' ');
@@ -84,12 +84,12 @@ namespace StudentWorksSearch.LuceneSearch
 
         //partially taken from http://www.codeproject.com/Articles/320219/Lucene-Net-ultra-fast-search-for-MVC-or-WebForms
         //START
-        static IEnumerable<Work> _search(string keywords, out int count, string field = "")
+        static IEnumerable<FileToIndex> _search(string keywords, out int count, string field = "")
         {
             if (string.IsNullOrEmpty(keywords.Replace("*", "").Replace("?", "")))
             {
                 count = 0;
-                return new List<Work>();
+                return new List<FileToIndex>();
             }
             using (var searcher = new IndexSearcher(_directory))
             using (var analyzer = new Lucene.Net.Analysis.Ru.RussianAnalyzer(Version.LUCENE_30))
@@ -137,21 +137,22 @@ namespace StudentWorksSearch.LuceneSearch
 
 
         //converting
-        private static Work _convertDoc(Document doc)
+        private static FileToIndex _convertDoc(Document doc)
         {
-            return new Work
+            return new FileToIndex
             {
                 Id = Convert.ToInt32(doc.Get("Id")),
                 Authors = doc.Get("Authors"),
                 Text = doc.Get("Text"),
                 Title = doc.Get("Title"),
-                Description=doc.Get("Description")
+                Description=doc.Get("Description"),
+                Hashtags=doc.Get("Hashtags")
             };
         }
 
-        private static IEnumerable<Work> _convertDocs(IEnumerable<ScoreDoc> docs, IndexSearcher searcher)
+        private static IEnumerable<FileToIndex> _convertDocs(IEnumerable<ScoreDoc> docs, IndexSearcher searcher)
         {
-            var samples = new List<Work>();
+            var samples = new List<FileToIndex>();
             foreach (var doc in docs)
             {
                 samples.Add(_convertDoc(searcher.Doc(doc.Doc)));
@@ -159,9 +160,9 @@ namespace StudentWorksSearch.LuceneSearch
             return samples;
         }
 
-        private static IEnumerable<Work> _convertDocs(IEnumerable<Document> docs)
+        private static IEnumerable<FileToIndex> _convertDocs(IEnumerable<Document> docs)
         {
-            var samples = new List<Work>();
+            var samples = new List<FileToIndex>();
             foreach (var doc in docs)
             {
                 samples.Add(_convertDoc(doc));

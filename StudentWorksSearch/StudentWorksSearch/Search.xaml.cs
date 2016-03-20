@@ -48,17 +48,24 @@ namespace StudentWorksSearch
        // все что понадобится и может быть связано с папкой  lucene
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            int number;//количество результатов
-            string field = "";
-            if (txtboxSearch.Text.StartsWith("#"))
-                field = "Hashtags";
-            var results= LuceneEngine.Search(txtboxSearch.Text, out number, field); //метод для получения коллекции Work, а где они указывают по какому полю искать? или не
-
+           
+                int number;//количество результатов
+                string field = "";
+                if (txtboxSearch.Text.StartsWith("#"))
+                    field = "Hashtags";
+                var results = LuceneEngine.Search(txtboxSearch.Text.Substring(1, txtboxSearch.Text.Length - 1),
+                    out number, field); //метод для получения коллекции Work, а где они указывают по какому полю искать? или не
+            foreach (var doc in results)
+            {
+                lstboxResult.Items.Add(doc.Title);
+            }
         }
 
         private void DeleteWork_Click(object sender, RoutedEventArgs e)
         {
-
+            int id = 0;
+            //если что тут должно быть это
+            LuceneEngine.DeleteIndex(id);
         }
 
         private void AddWork_Click(object sender, RoutedEventArgs e)

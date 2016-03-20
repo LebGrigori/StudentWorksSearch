@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StudentWorksSearch.LuceneSearch
 {
-    public class Work
+    public class FileToIndex
     {
         public int Id { get; set; }
         public string Text { get; set; }

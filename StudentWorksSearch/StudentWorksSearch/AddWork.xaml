@@ -28,7 +28,7 @@
             <TextBlock HorizontalAlignment="Center" Margin="5" FontSize="16">Загрузка работы</TextBlock>
         </Border>
         <TextBlock HorizontalAlignment="Left" Grid.Row="2" Grid.ColumnSpan="2" Margin="20 0">* - поля обязательные для заполнения</TextBlock>
-        <Button Name="btnFile" Click="btnFile_Click" Grid.Row="1" Grid.ColumnSpan="2" Margin="80 5">Добавить файл</Button>
+        <Button Name="btnFile" Click="btnFile_Click" Grid.Row="1" Grid.ColumnSpan="2" Margin="93,5,67,5">Выбрать файл</Button>
         <TextBlock Grid.Row="3" Margin="5" HorizontalAlignment="Right">Название:*</TextBlock>
         <TextBlock Grid.Row="4" Margin="5" HorizontalAlignment="Right">Дисциплина:*</TextBlock>
         <TextBlock Grid.Row="5" Margin="5" HorizontalAlignment="Right">Авторы:</TextBlock>
