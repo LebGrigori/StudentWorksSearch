@@ -119,3 +119,5 @@ C:\Users\LebGrigori\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWo
 C:\Users\LebGrigori\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\StudentWorksSearch.g.resources
 C:\Users\LebGrigori\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\StudentWorksSearch.Properties.Resources.resources
 C:\Users\LebGrigori\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\StudentWorksSearch.csproj.GenerateResource.Cache
+C:\Users\LebGrigori\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\bin\Debug\Newtonsoft.Json.dll
+C:\Users\LebGrigori\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\bin\Debug\Newtonsoft.Json.xml
