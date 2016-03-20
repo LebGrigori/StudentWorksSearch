@@ -35,11 +35,13 @@ namespace StudentWorksSearch
             {
                 LuceneSearch.LuceneEngine le = new LuceneSearch.LuceneEngine();
                var engine = new FileEngine();
+                
                 if (txtboxName.Text != "" && cmbboxDis.SelectedIndex != -1)
                 {
                    var IndexMe= engine.AddFile(txtboxName.Text, cmbboxDis.SelectedIndex, txtboxAuth.Text, txtboxTags.Text, txtboxComment.Text);
-                    this.Close();
                     le.BuildIndex(IndexMe);//index this file
+                   
+                    this.Close();
                 }
                 else
                     MessageBox.Show("Вы ввели не все данные!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);

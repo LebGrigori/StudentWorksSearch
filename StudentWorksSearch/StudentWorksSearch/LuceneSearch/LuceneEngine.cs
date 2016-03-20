@@ -46,6 +46,7 @@ namespace StudentWorksSearch.LuceneSearch
                 using (IndexWriter idxw = new IndexWriter(_directory, analyzer, true, IndexWriter.MaxFieldLength.UNLIMITED))
                 {
                     //check if document exists, if true deletes existing
+                    
                     var searchQuery = new TermQuery(new Term("Id", file.Id.ToString()));
                     idxw.DeleteDocuments(searchQuery);
                     //creation
@@ -58,13 +59,22 @@ namespace StudentWorksSearch.LuceneSearch
                     doc.Add(new Field("Hashtags", file.Hashtags, Field.Store.YES, Field.Index.ANALYZED));
                     //write the document to the index
                     idxw.AddDocument(doc);
+                    
 
                     //optimize and close the writer
                     idxw.Commit();
+                    
                     idxw.Optimize();
+                   
                 }
             }
         }
+
+        //public int CountDocs()
+        //{
+        //    var reader = IndexReader.Open(_directory, true);
+        //    return reader.NumDocs();
+        //}
 
         public  IEnumerable<FileToIndex> Search(string input, out int count, string fieldName = "")
         {

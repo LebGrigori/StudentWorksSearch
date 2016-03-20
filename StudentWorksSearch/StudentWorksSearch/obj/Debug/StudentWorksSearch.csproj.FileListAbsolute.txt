@@ -135,3 +135,7 @@ C:\Users\ekaterinazhelandovsk\Source\Repos\StudentWorksSearch\StudentWorksSearch
 C:\Users\ekaterinazhelandovsk\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\AddWork.baml
 C:\Users\ekaterinazhelandovsk\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\GradeWork.baml
 C:\Users\ekaterinazhelandovsk\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\PlagiarismCheck.baml
+C:\Users\LebGrigori\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\LebGrigori\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\bin\Debug\ru\EntityFramework.SqlServer.resources.dll
+C:\Users\LebGrigori\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\PlagiarismCheck.g.cs
+C:\Users\LebGrigori\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\PlagiarismCheck.baml
