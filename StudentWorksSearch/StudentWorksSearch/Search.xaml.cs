@@ -45,38 +45,44 @@ namespace StudentWorksSearch
             new Registration().ShowDialog();
         }
 
+        //без статик
        // все что понадобится и может быть связано с папкой  lucene
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-           
-                int number;//количество результатов
+            LuceneEngine le = new LuceneEngine();
+
+
+            int number;//количество результатов
                 string field = "";
+            IEnumerable<FileToIndex> results;
             if (txtboxSearch.Text.StartsWith("#"))
             {
                 field = "Hashtags";
-                var results = LuceneEngine.Search(txtboxSearch.Text.Substring(1, txtboxSearch.Text.Length - 1),
+                results = le.Search(txtboxSearch.Text.Substring(1, txtboxSearch.Text.Length - 1),
                     out number, field);
-                foreach (var doc in results)
-                {
-                    lstboxResult.Items.Add(doc.Title);
-                }
             }
             else
             {
-                var results = LuceneEngine.Search(txtboxSearch.Text,
-                    out number);
-                foreach (var doc in results)
-                {
-                    lstboxResult.Items.Add(doc.Title);
-                }
+                results = le.Search(txtboxSearch.Text,
+                    out number);           
+            }
+            lstboxResult.Items.Clear();
+            foreach (var doc in results)
+            {
+                lstboxResult.Items.Add(doc.Title);
             }
         }
 
+
+        //без статик
         private void DeleteWork_Click(object sender, RoutedEventArgs e)
         {
+            LuceneEngine le = new LuceneEngine();
+
+
             int id = 0;
             //если что тут должно быть это
-            LuceneEngine.DeleteIndex(id);
+            le.DeleteIndex(id);
         }
 
         private void AddWork_Click(object sender, RoutedEventArgs e)
