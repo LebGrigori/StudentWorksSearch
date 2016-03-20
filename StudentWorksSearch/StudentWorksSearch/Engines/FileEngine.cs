@@ -73,7 +73,7 @@ namespace StudentWorksSearch.Engines
             
                 file.ShowDialog();
                 string str = new FileInfo(file.FileName).Name;
-                Repository.Path = Path.Combine("../../../Data", str);
+                Repository.Path = Path.Combine("../../../Data/DBDocs", str);
                 File.Copy(file.FileName, Repository.Path);
                 Repository.Size = new FileInfo(Repository.Path).Length / 1024;
             
