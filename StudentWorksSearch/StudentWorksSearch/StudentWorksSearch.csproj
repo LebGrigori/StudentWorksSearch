@@ -271,6 +271,11 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="img\Add.png" />
+    <Resource Include="img\Edit.png" />
+    <Resource Include="img\Info.png" />
+    <Resource Include="img\Save.png" />
+    <Resource Include="img\Check.png" />
     <Content Include="SearchWorkDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SearchWorkDB.edmx</DependentUpon>
