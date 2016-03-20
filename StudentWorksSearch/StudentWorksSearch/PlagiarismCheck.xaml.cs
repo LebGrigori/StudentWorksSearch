@@ -22,7 +22,7 @@ namespace StudentWorksSearch
         public PlagiarismCheck()
         {
             InitializeComponent();
-            
+            progressBar.IsIndeterminate = true;
         }
     }
 }
