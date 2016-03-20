@@ -19,15 +19,34 @@
 
         <Menu>
             <MenuItem Header="Файл">
-                <MenuItem Header="Скачать работу" Name="DownloadWork" Click="DownloadWork_Click"/>
-                <MenuItem Header="Добавить работу" Name="AddWork" Click="AddWork_Click"/>
-                <MenuItem Header="Удалить работу" Name="DeleteWork" Click="DeleteWork_Click"/>
+                <MenuItem Header="Скачать работу" Name="DownloadWork"  Click="DownloadWork_Click">
+                    <MenuItem.Icon>
+                        <Image Source="img/Save.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Добавить работу" Name="AddWork" Click="AddWork_Click">
+                    <MenuItem.Icon>
+                        <Image Source="img/Add.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator/>
-                <MenuItem Header="Оценить работу"/>
+                <MenuItem Name="btnPlagCheck" Header="Проверить плагиат">
+                    <MenuItem.Icon>
+                        <Image Source="img/Check.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Обо мне">
-                <MenuItem Name="btnMyData" Click="btnMyData_Click" Header="Мои данные"/>
-                <MenuItem Name="btnEdit" Click="btnEdit_Click" Header="Редактировать информацию"/>
+                <MenuItem Name="btnMyData" Click="btnMyData_Click" Header="Мои данные">
+                    <MenuItem.Icon>
+                        <Image Source="img/Info.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="btnEdit" Click="btnEdit_Click" Header="Редактировать информацию">
+                    <MenuItem.Icon>
+                        <Image Source="img/Edit.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Name="btnAbout" Header="О программе" Click="btnAbout_Click"></MenuItem>
         </Menu>

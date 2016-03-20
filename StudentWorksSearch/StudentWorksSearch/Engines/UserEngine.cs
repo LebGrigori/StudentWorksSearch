@@ -33,7 +33,7 @@ namespace StudentWorksSearch
                 List<string> USERPass = new List<string>();
                 USERPass = query.Select(a => a).ToList();
 
-                if (USERPass[0] == _password)
+                if (USERPass[0] == Hash(_password))
                 {
                     return true;
                 }
@@ -46,7 +46,7 @@ namespace StudentWorksSearch
             }
         }
 
-        public void AddUser(string Mail, string Name, string Uni, string Fac, out bool result)
+        public void AddUser(string Mail, string Name, string Uni, out bool result)
         {
             var query =
                       from USER in db.Users
@@ -54,22 +54,17 @@ namespace StudentWorksSearch
             List<string> USERLogIn = new List<string>();
             USERLogIn = query.Select(a => a).ToList();
 
+            if (Uni == "")
+            {
+                Uni = null;
+            }
             if (!USERLogIn.Contains(_username))
             {
-                if (Uni == "")
-                {
-                    Uni = null;
-                }
-                
-                if (Fac == "")
-                {
-                    Fac = null;
-                }
 
                 db.Users.Add(new Users
                 {
                     Login = _username,
-                    Password = _password,
+                    Password = Hash(_password),
                     Name = Name,
                     Registration = DateTime.Now,
                     University = Uni,
@@ -96,7 +91,7 @@ namespace StudentWorksSearch
             }
         }
 
-        public void UpdUserData(string Mail, string Name, string Uni, string Fac)
+        public void UpdUserData(string Mail, string Name, string Uni)
         {
             var query =
                       from USER in db.Users
@@ -112,6 +107,22 @@ namespace StudentWorksSearch
 
             db.SaveChanges();
             GetUserData();
+        }
+
+        public static String Hash(String value)
+        {
+            StringBuilder Sb = new StringBuilder();
+
+            using (SHA256 hash = SHA256Managed.Create())
+            {
+                Encoding enc = Encoding.UTF8;
+                Byte[] result = hash.ComputeHash(enc.GetBytes(value));
+
+                foreach (Byte b in result)
+                    Sb.Append(b.ToString("x2"));
+            }
+
+            return Sb.ToString();
         }
 
     }

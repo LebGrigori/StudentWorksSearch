@@ -8,6 +8,7 @@ using Microsoft.Office.Interop.Word;
 using System.Windows;
 using System.IO;
 using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace StudentWorksSearch.Engines
 {
@@ -72,7 +73,7 @@ namespace StudentWorksSearch.Engines
             
                 file.ShowDialog();
                 string str = new FileInfo(file.FileName).Name;
-                Repository.Path = Path.Combine("../../../Data", str);
+                Repository.Path = Path.Combine("../../../Data/DBDocs", str);
                 File.Copy(file.FileName, Repository.Path);
                 Repository.Size = new FileInfo(Repository.Path).Length / 1024;
             
@@ -88,18 +89,6 @@ namespace StudentWorksSearch.Engines
             db.Files.Add(file);
             db.SaveChanges();
 
-            if (auth == "")
-            {
-                auth = null;
-            }
-            if (tags == "")
-            {
-                tags = null;
-            }
-            if (comm == "")
-            {
-                comm = null;
-            }
             db.Work.Add(new Work
             {
                 Date = DateTime.Now,
@@ -114,10 +103,11 @@ namespace StudentWorksSearch.Engines
                 
             });
             db.SaveChanges();
+
             return new LuceneSearch.FileToIndex
             {
                 Id = file.Id,
-                Text = GetDocText(Repository.Path),
+                Text = GetDocText(Path.GetFullPath(file.Path)),
                 Description = comm,
                 Authors = auth,
                 Title = name,
@@ -125,9 +115,12 @@ namespace StudentWorksSearch.Engines
             };
         }
 
-        public void Save()
+        public void Save(string path)
         {
-            OpenFileDialog file = new OpenFileDialog();
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            startInfo.FileName = "WINWORD.EXE";
+            startInfo.Arguments = path;
+            Process.Start(startInfo);
         }
     }
 }

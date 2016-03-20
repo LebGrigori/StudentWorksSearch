@@ -37,5 +37,12 @@ namespace StudentWorksSearch
             set { size = value; }
         }
 
+        private static string uid;
+        public static string UID
+        {
+            get { return uid; }
+            set { uid = value; }
+        }
+
     }
 }
