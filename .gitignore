@@ -1,0 +1,6 @@
+﻿################################################################################
+# Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
+################################################################################
+
+/StudentWorksSearch/StudentWorksSearch/bin/Debug/StudentWorksSearch.vshost.exe.manifest
+/StudentWorksSearch/StudentWorksSearch/obj/Debug
