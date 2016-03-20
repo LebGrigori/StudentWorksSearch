@@ -53,6 +53,12 @@
     <Compile Include="LuceneEngine.Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StudentWorksSearch\StudentWorksSearch.csproj">
+      <Project>{f107be94-0a59-41d8-8ed4-e44771e8246a}</Project>
+      <Name>StudentWorksSearch</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
