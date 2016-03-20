@@ -74,15 +74,6 @@ namespace StudentWorksSearch
         }
 
 
-        //без статик
-        private void DeleteWork_Click(object sender, RoutedEventArgs e)
-        {
-            int id = 0;
-            LuceneEngine le = new LuceneEngine();
-            //если что тут должно быть это
-            le.DeleteIndex(id);
-        }
-
         private void AddWork_Click(object sender, RoutedEventArgs e)
         { 
             new AddWork().ShowDialog();
@@ -92,6 +83,11 @@ namespace StudentWorksSearch
         {
             var engine = new FileEngine();
             engine.Save(lstboxResult.SelectedItem.ToString()); 
+        }
+
+        private void btnPlagCheck_Click(object sender, RoutedEventArgs e)
+        {
+            new PlagiarismCheck().ShowDialog();
         }
     }
 }

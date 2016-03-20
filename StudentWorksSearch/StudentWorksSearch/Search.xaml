@@ -30,7 +30,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Name="btnPlagCheck" Header="Проверить плагиат">
+                <MenuItem Name="btnPlagCheck" Click="btnPlagCheck_Click" Header="Проверить плагиат">
                     <MenuItem.Icon>
                         <Image Source="img/Check.png"></Image>
                     </MenuItem.Icon>

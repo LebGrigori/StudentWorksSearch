@@ -137,6 +137,9 @@
     </Compile>
     <Compile Include="LuceneSearch\LuceneEngine.cs" />
     <Compile Include="LuceneSearch\FileToIndex.cs" />
+    <Compile Include="PlagiarismCheck.xaml.cs">
+      <DependentUpon>PlagiarismCheck.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PlagiarismCheck.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Registration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

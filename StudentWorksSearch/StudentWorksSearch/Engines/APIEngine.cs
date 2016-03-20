@@ -16,6 +16,11 @@ namespace StudentWorksSearch.Engines
     {
         const string Key = "af8335d256e4db6b20d7425e3821e1c6";
 
+        public APIEngine()
+        {
+
+        }
+
         public static void POST(string txt)
         {
             var client = new HttpClient();
@@ -28,24 +33,35 @@ namespace StudentWorksSearch.Engines
             var result = client.PostAsync("/post", content).Result;
             string resultContent = result.Content.ReadAsStringAsync().Result;
             var res = JsonConvert.DeserializeObject<UID>(resultContent);
-            Repository.UID = res.uid;
             GET(res.uid);
         }
 
-        public static void GET(string uid)
+        public static double GET(string uid)
         {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri("http://api.text.ru");
-            var content = new FormUrlEncodedContent(new[] {
+            bool t = true;
+            double unique;
+            do
+            {
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://api.text.ru");
+                var content = new FormUrlEncodedContent(new[] {
             new KeyValuePair<string, string>("uid", uid),
             new KeyValuePair<string, string>("userkey", Key),
             });
 
-            var result = client.PostAsync("/post", content).Result;
-            string resultContent = result.Content.ReadAsStringAsync().Result;
-            var res = JsonConvert.DeserializeObject<Plagiarism>(resultContent);
-            double unique = res.uniq;
+                var result = client.PostAsync("/post", content).Result;
+                string resultContent = result.Content.ReadAsStringAsync().Result;
+                var res = JsonConvert.DeserializeObject<Plagiarism>(resultContent);
+                unique = res.uniq;
+                int error = res.err;
+                if (error == 181)
+                {
+                    t = false;
+                }
+                else
+                    t = true;
+            } while (!t);
+            return unique;
         }
-
     }
 }

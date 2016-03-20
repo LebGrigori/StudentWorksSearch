@@ -11,5 +11,8 @@ namespace StudentWorksSearch.Engines.DTO
     {
         [JsonProperty("text_unique")]
         public double uniq { get; set; }
+
+        [JsonProperty("error_code")]
+        public int err { get; set; }
     }
 }
