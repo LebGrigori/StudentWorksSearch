@@ -73,6 +73,7 @@ namespace StudentWorksSearch.Engines
 
             file.ShowDialog();
             string str = new FileInfo(file.FileName).Name;
+            str = str.Replace(" ", string.Empty);
             Repository.Path = Path.Combine("../../../Data/DBDocs", str);
             string dir = new FileInfo(Repository.Path).DirectoryName;
             if (!Directory.Exists(dir))

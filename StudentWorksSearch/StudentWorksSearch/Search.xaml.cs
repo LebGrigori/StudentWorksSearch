@@ -24,6 +24,8 @@ namespace StudentWorksSearch
         public Search()
         {
             InitializeComponent();
+            btnPlagCheck.IsEnabled = false;
+            DownloadWork.IsEnabled = false;
         }
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)
@@ -75,6 +77,8 @@ namespace StudentWorksSearch
             foreach (var doc in results)
             {
                 lstboxResult.Items.Add(doc.Id+" "+doc.Title);
+                btnPlagCheck.IsEnabled = true;
+                DownloadWork.IsEnabled = true;
             }
         }
 

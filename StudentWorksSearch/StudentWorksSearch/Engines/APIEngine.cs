@@ -16,12 +16,14 @@ namespace StudentWorksSearch.Engines
     {
         const string Key = "af8335d256e4db6b20d7425e3821e1c6";
 
+        public event Action<string> CheckReady;
+
         public APIEngine()
         {
 
         }
 
-        public string POST(string txt)
+        public double POST(string txt)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri("http://api.text.ru");
@@ -33,7 +35,7 @@ namespace StudentWorksSearch.Engines
             var result = client.PostAsync("/post", content).Result;
             string resultContent = result.Content.ReadAsStringAsync().Result;
             var res = JsonConvert.DeserializeObject<UID>(resultContent);
-            return GET(res.uid).ToString();
+            return GET(res.uid);
         }
 
         public double GET(string uid)
@@ -61,7 +63,23 @@ namespace StudentWorksSearch.Engines
                 else
                     t = true;
             } while (!t);
+            Repository.Work.Plag = unique;
             return unique;
+        }
+
+        public void StartCheck()
+        {
+            var engineFile = new FileEngine();
+            string text;
+            double p;
+            var t = Task.Factory.StartNew(() =>
+            {
+                text = engineFile.GetDocText(Path.GetFullPath(Repository.Work.Filepath));
+                p = POST(text);
+                if (CheckReady != null)
+                    CheckReady(p.ToString());
+            }); 
+            
         }
     }
 }
