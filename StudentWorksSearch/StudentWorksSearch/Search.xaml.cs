@@ -51,13 +51,24 @@ namespace StudentWorksSearch
            
                 int number;//количество результатов
                 string field = "";
-                if (txtboxSearch.Text.StartsWith("#"))
-                    field = "Hashtags";
-                var results = LuceneEngine.Search(txtboxSearch.Text.Substring(1, txtboxSearch.Text.Length - 1),
-                    out number, field); //метод для получения коллекции Work, а где они указывают по какому полю искать? или не
-            foreach (var doc in results)
+            if (txtboxSearch.Text.StartsWith("#"))
             {
-                lstboxResult.Items.Add(doc.Title);
+                field = "Hashtags";
+                var results = LuceneEngine.Search(txtboxSearch.Text.Substring(1, txtboxSearch.Text.Length - 1),
+                    out number, field);
+                foreach (var doc in results)
+                {
+                    lstboxResult.Items.Add(doc.Title);
+                }
+            }
+            else
+            {
+                var results = LuceneEngine.Search(txtboxSearch.Text,
+                    out number);
+                foreach (var doc in results)
+                {
+                    lstboxResult.Items.Add(doc.Title);
+                }
             }
         }
 
@@ -69,13 +80,14 @@ namespace StudentWorksSearch
         }
 
         private void AddWork_Click(object sender, RoutedEventArgs e)
-        {
+        { 
             new AddWork().ShowDialog();
         }
 
         private void DownloadWork_Click(object sender, RoutedEventArgs e)
         {
-
+            var engine = new FileEngine();
+            engine.Save(lstboxResult.SelectedItem.ToString()); 
         }
     }
 }

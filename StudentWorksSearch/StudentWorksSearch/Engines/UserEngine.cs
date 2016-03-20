@@ -56,15 +56,6 @@ namespace StudentWorksSearch
 
             if (!USERLogIn.Contains(_username))
             {
-                if (Uni == "")
-                {
-                    Uni = null;
-                }
-                
-                if (Fac == "")
-                {
-                    Fac = null;
-                }
 
                 db.Users.Add(new Users
                 {

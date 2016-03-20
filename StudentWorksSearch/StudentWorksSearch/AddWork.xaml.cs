@@ -43,9 +43,9 @@ namespace StudentWorksSearch
                 else
                     MessageBox.Show("Вы ввели не все данные!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Вы не выбрали файл!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Вы не выбрали файл!" +ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

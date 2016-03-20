@@ -123,6 +123,7 @@
     <Compile Include="Discipline.cs">
       <DependentUpon>SearchWorkDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Engines\APIEngine.cs" />
     <Compile Include="Engines\DBEngine.cs" />
     <Compile Include="Engines\FileEngine.cs" />
     <Compile Include="Files.cs">
