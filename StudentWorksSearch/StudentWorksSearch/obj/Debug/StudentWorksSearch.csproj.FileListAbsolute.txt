@@ -126,3 +126,12 @@ C:\Users\LGD06\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSe
 C:\Users\LGD06\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\StudentWorksSearch.csproj.ResolveComReference.cache
 C:\Users\LGD06\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\StudentWorksSearch.exe
 C:\Users\LGD06\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\StudentWorksSearch.pdb
+C:\Users\ekaterinazhelandovsk\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\ekaterinazhelandovsk\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ekaterinazhelandovsk\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ekaterinazhelandovsk\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\AddWork.g.cs
+C:\Users\ekaterinazhelandovsk\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\GradeWork.g.cs
+C:\Users\ekaterinazhelandovsk\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\PlagiarismCheck.g.cs
+C:\Users\ekaterinazhelandovsk\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\AddWork.baml
+C:\Users\ekaterinazhelandovsk\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\GradeWork.baml
+C:\Users\ekaterinazhelandovsk\Source\Repos\StudentWorksSearch\StudentWorksSearch\StudentWorksSearch\obj\Debug\PlagiarismCheck.baml
