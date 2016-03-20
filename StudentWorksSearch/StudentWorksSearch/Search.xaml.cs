@@ -49,7 +49,7 @@ namespace StudentWorksSearch
        // все что понадобится и может быть связано с папкой  lucene
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            LuceneEngine le = new LuceneEngine();
+          //  LuceneEngine le = new LuceneEngine();
 
 
             int number;//количество результатов
@@ -58,12 +58,12 @@ namespace StudentWorksSearch
             if (txtboxSearch.Text.StartsWith("#"))
             {
                 field = "Hashtags";
-                results = le.Search(txtboxSearch.Text.Substring(1, txtboxSearch.Text.Length - 1),
+                results = LuceneEngine.Search(txtboxSearch.Text.Substring(1, txtboxSearch.Text.Length - 1),
                     out number, field);
             }
             else
             {
-                results = le.Search(txtboxSearch.Text,
+                results = LuceneEngine.Search(txtboxSearch.Text,
                     out number);           
             }
             lstboxResult.Items.Clear();

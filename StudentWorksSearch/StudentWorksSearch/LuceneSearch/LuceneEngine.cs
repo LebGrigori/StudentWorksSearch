@@ -21,10 +21,10 @@ namespace StudentWorksSearch.LuceneSearch
 
         //this part taken from http://www.codeproject.com/Articles/320219/Lucene-Net-ultra-fast-search-for-MVC-or-WebForms
         //START
-        //  private static string _luceneDir = Path.Combine("../../../Data/", "lucene_index1");
-        private const string _luceneDir = "../../../Data/lucene_index";
-        private  FSDirectory _directoryTemp;
-        private  FSDirectory _directory
+          private static string _luceneDir = Path.Combine("../../../Data/", "lucene_index1");
+ //       private const string _luceneDir = "../../../Data/lucene_index";
+        private static  FSDirectory _directoryTemp;
+        private  static  FSDirectory _directory
         {
             get
             {
@@ -39,7 +39,7 @@ namespace StudentWorksSearch.LuceneSearch
         //END
 
         //this method creates document from an ObjectToIndex
-        public  void BuildIndex(FileToIndex file)
+        public  static void BuildIndex(FileToIndex file)
         {
             using (var analyzer = new Lucene.Net.Analysis.Ru.RussianAnalyzer(Version.LUCENE_30))
             {
@@ -66,7 +66,7 @@ namespace StudentWorksSearch.LuceneSearch
             }
         }
 
-        public  IEnumerable<FileToIndex> Search(string input, out int count, string fieldName = "")
+        public static IEnumerable<FileToIndex> Search(string input, out int count, string fieldName = "")
         {
             if (string.IsNullOrEmpty(input))
             {
@@ -85,7 +85,7 @@ namespace StudentWorksSearch.LuceneSearch
 
         //partially taken from http://www.codeproject.com/Articles/320219/Lucene-Net-ultra-fast-search-for-MVC-or-WebForms
         //START
-        private IEnumerable<FileToIndex> _search(string keywords, out int count, string field = "")
+        private static IEnumerable<FileToIndex> _search(string keywords, out int count, string field = "")
         {
             if (string.IsNullOrEmpty(keywords.Replace("*", "").Replace("?", "")))
             {
@@ -120,7 +120,7 @@ namespace StudentWorksSearch.LuceneSearch
         }
         
 
-        private Query parseQuery(string searchQuery, QueryParser parser)
+        private static  Query parseQuery(string searchQuery, QueryParser parser)
         {
             Query query;
             try
@@ -138,7 +138,7 @@ namespace StudentWorksSearch.LuceneSearch
 
 
         //converting
-        private  FileToIndex _convertDoc(Document doc)
+        private static  FileToIndex _convertDoc(Document doc)
         {
             return new FileToIndex
             {
@@ -151,7 +151,7 @@ namespace StudentWorksSearch.LuceneSearch
             };
         }
 
-        private  IEnumerable<FileToIndex> _convertDocs(IEnumerable<ScoreDoc> docs, IndexSearcher searcher)
+        private static IEnumerable<FileToIndex> _convertDocs(IEnumerable<ScoreDoc> docs, IndexSearcher searcher)
         {
             var samples = new List<FileToIndex>();
             foreach (var doc in docs)
@@ -161,7 +161,7 @@ namespace StudentWorksSearch.LuceneSearch
             return samples;
         }
 
-        private  IEnumerable<FileToIndex> _convertDocs(IEnumerable<Document> docs)
+        private static IEnumerable<FileToIndex> _convertDocs(IEnumerable<Document> docs)
         {
             var samples = new List<FileToIndex>();
             foreach (var doc in docs)
@@ -172,7 +172,7 @@ namespace StudentWorksSearch.LuceneSearch
         }
 
         //deleting index
-        public  void DeleteIndex(int id)
+        public static void DeleteIndex(int id)
         {
             using (var analyzer = new Lucene.Net.Analysis.Ru.RussianAnalyzer(Version.LUCENE_30))
             using (var writer = new IndexWriter(_directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED))
