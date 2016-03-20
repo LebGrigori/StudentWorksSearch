@@ -70,13 +70,18 @@ namespace StudentWorksSearch.Engines
             OpenFileDialog file = new OpenFileDialog();
             file.Filter = "Word Documents|*.doc;*.docx";
             file.FilterIndex = 1;
-            
-                file.ShowDialog();
-                string str = new FileInfo(file.FileName).Name;
-                Repository.Path = Path.Combine("../../../Data/DBDocs", str);
-                File.Copy(file.FileName, Repository.Path);
-                Repository.Size = new FileInfo(Repository.Path).Length / 1024;
-            
+
+            file.ShowDialog();
+            string str = new FileInfo(file.FileName).Name;
+            Repository.Path = Path.Combine("../../../Data/DBDocs", str);
+            string dir = new FileInfo(Repository.Path).DirectoryName;
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            File.Copy(file.FileName, Repository.Path);
+            Repository.Size = new FileInfo(Repository.Path).Length / 1024;
+
         }
 
         public LuceneSearch.FileToIndex AddFile(string name, int dis, string auth, string tags, string comm)
@@ -100,7 +105,7 @@ namespace StudentWorksSearch.Engines
                 University = Repository.User.University,
                 Name = name,
                 Description = comm
-                
+
             });
             db.SaveChanges();
 

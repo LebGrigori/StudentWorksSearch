@@ -121,9 +121,6 @@
     <Compile Include="AddWork.xaml.cs">
       <DependentUpon>AddWork.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Comments.cs">
-      <DependentUpon>SearchWorkDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Discipline.cs">
       <DependentUpon>SearchWorkDB.tt</DependentUpon>
     </Compile>
@@ -163,9 +160,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchWorkDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>SearchWorkDB.tt</DependentUpon>
     </Compile>
     <Compile Include="University.cs">
       <DependentUpon>SearchWorkDB.tt</DependentUpon>
@@ -276,6 +270,8 @@
     <Resource Include="img\Info.png" />
     <Resource Include="img\Save.png" />
     <Resource Include="img\Check.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="SearchWorkDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SearchWorkDB.edmx</DependentUpon>

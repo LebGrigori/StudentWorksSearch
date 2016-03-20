@@ -1,18 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="SearchWorkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Comments">
-    <Key>
-      <PropertyRef Name="Author" />
-      <PropertyRef Name="Work" />
-    </Key>
-    <Property Name="Author" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Work" Type="Int32" Nullable="false" />
-    <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Scores" Type="Int32" Nullable="false" />
-    <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="Users" Relationship="Self.R_39" FromRole="Comments" ToRole="Users" />
-    <NavigationProperty Name="Work1" Relationship="Self.R_40" FromRole="Comments" ToRole="Work" />
-  </EntityType>
   <EntityType Name="Discipline">
     <Key>
       <PropertyRef Name="Id" />
@@ -29,16 +16,6 @@
     <Property Name="Path" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Size" Type="Double" Nullable="false" />
     <NavigationProperty Name="Work" Relationship="Self.R_30" FromRole="Files" ToRole="Work" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="University">
     <Key>
@@ -59,7 +36,6 @@
     <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="E_mail" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="University" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Comments" Relationship="Self.R_39" FromRole="Users" ToRole="Comments" />
     <NavigationProperty Name="University1" Relationship="Self.R_34" FromRole="Users" ToRole="University" />
     <NavigationProperty Name="Work" Relationship="Self.R_41" FromRole="Users" ToRole="Work" />
   </EntityType>
@@ -73,41 +49,16 @@
     <Property Name="Hashtags" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
     <Property Name="Plagiarism" Type="Double" />
     <Property Name="Documet" Type="Int32" Nullable="false" />
-    <Property Name="Authors" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Authors" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="Uploader" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="University" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Comments" Relationship="Self.R_40" FromRole="Work" ToRole="Comments" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Discipline" Relationship="Self.R_14" FromRole="Work" ToRole="Discipline" />
     <NavigationProperty Name="Files" Relationship="Self.R_30" FromRole="Work" ToRole="Files" />
     <NavigationProperty Name="University1" Relationship="Self.R_42" FromRole="Work" ToRole="University" />
     <NavigationProperty Name="Users" Relationship="Self.R_41" FromRole="Work" ToRole="Users" />
   </EntityType>
-  <Association Name="R_39">
-    <End Role="Users" Type="Self.Users" Multiplicity="1" />
-    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Users">
-        <PropertyRef Name="Login" />
-      </Principal>
-      <Dependent Role="Comments">
-        <PropertyRef Name="Author" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="R_40">
-    <End Role="Work" Type="Self.Work" Multiplicity="1" />
-    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Work">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Comments">
-        <PropertyRef Name="Work" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="R_14">
     <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
     <End Role="Work" Type="Self.Work" Multiplicity="*" />
@@ -169,21 +120,11 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="SearchWorkEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Comments" EntityType="Self.Comments" />
     <EntitySet Name="Discipline" EntityType="Self.Discipline" />
     <EntitySet Name="Files" EntityType="Self.Files" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <EntitySet Name="University" EntityType="Self.University" />
     <EntitySet Name="Users" EntityType="Self.Users" />
     <EntitySet Name="Work" EntityType="Self.Work" />
-    <AssociationSet Name="R_39" Association="Self.R_39">
-      <End Role="Users" EntitySet="Users" />
-      <End Role="Comments" EntitySet="Comments" />
-    </AssociationSet>
-    <AssociationSet Name="R_40" Association="Self.R_40">
-      <End Role="Work" EntitySet="Work" />
-      <End Role="Comments" EntitySet="Comments" />
-    </AssociationSet>
     <AssociationSet Name="R_14" Association="Self.R_14">
       <End Role="Discipline" EntitySet="Discipline" />
       <End Role="Work" EntitySet="Work" />

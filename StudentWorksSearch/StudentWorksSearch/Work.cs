@@ -14,12 +14,6 @@ namespace StudentWorksSearch
     
     public partial class Work
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Work()
-        {
-            this.Comments = new HashSet<Comments>();
-        }
-    
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
         public int Descipline { get; set; }
@@ -32,8 +26,6 @@ namespace StudentWorksSearch
         public string Name { get; set; }
         public string Description { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comments> Comments { get; set; }
         public virtual Discipline Discipline { get; set; }
         public virtual Files Files { get; set; }
         public virtual University University1 { get; set; }
