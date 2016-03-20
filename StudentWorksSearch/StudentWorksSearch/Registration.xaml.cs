@@ -46,8 +46,8 @@ namespace StudentWorksSearch
 
         private void btnReg_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 if (Repository.Edit == false)
                 {
                     if (txtboxLogIn.Text != "" && txtboxMail.Text != "" && passboxPass.Password != "")
@@ -57,11 +57,11 @@ namespace StudentWorksSearch
 
                         if (cmbboxUni.SelectedIndex != -1)
                         {
-                            engine.AddUser(txtboxMail.Text, txtboxName.Text, cmbboxUni.SelectedItem.ToString(), "", out result);
+                            engine.AddUser(txtboxMail.Text, txtboxName.Text, cmbboxUni.SelectedItem.ToString(), out result);
                         }
                         else
                         {
-                            engine.AddUser(txtboxMail.Text, txtboxName.Text, "", "", out result);
+                            engine.AddUser(txtboxMail.Text, txtboxName.Text, "", out result);
                         }
 
                         if (result)
@@ -85,17 +85,17 @@ namespace StudentWorksSearch
                     if (txtboxLogIn.Text != "" && txtboxMail.Text != "")
                     {
                         var engine = new UserEngine(txtboxLogIn.Text, "");
-                        engine.UpdUserData(txtboxMail.Text, txtboxName.Text, cmbboxUni.SelectedItem.ToString(), "");
+                        engine.UpdUserData(txtboxMail.Text, txtboxName.Text, cmbboxUni.SelectedItem.ToString());
                         this.Close();
                     }
                     else
                         MessageBox.Show("Введеные не все данные!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Введеные не все данные!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Введеные не все данные!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
         }
     }
 }

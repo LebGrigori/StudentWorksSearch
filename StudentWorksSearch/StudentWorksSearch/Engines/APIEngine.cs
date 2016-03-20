@@ -1,42 +1,51 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using StudentWorksSearch.Engines.DTO;
 
 namespace StudentWorksSearch.Engines
 {
     class APIEngine
     {
-        const string PostURL = "http://api.text.ru/post";
-        const string Key = "af8335d256e4db6b20d7425e3821e1c6"; 
+        const string Key = "af8335d256e4db6b20d7425e3821e1c6";
 
-        //public void POST(string txt)
-        //{
-        //    using (var webClient = new WebClient())
-        //    {
-        //        var pars = new NameValueCollection();
-        //        pars.Add(txt, Key);
+        public static void POST(string txt)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("http://api.text.ru");
+            var content = new FormUrlEncodedContent(new[] {
+            new KeyValuePair<string, string>("text", txt),
+            new KeyValuePair<string, string>("userkey", Key),
+            });
 
-        //        var response = webClient.UploadValues(PostURL, pars);
+            var result = client.PostAsync("/post", content).Result;
+            string resultContent = result.Content.ReadAsStringAsync().Result;
+            var res = JsonConvert.DeserializeObject<UID>(resultContent);
+            Repository.UID = res.uid;
+            GET(res.uid);
+        }
 
-        //        List<byte> UNIList = new List<byte>();
-        //        UNIList = response.Select(a => a).ToList();
-        //    }
-        //}
+        public static void GET(string uid)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri("http://api.text.ru");
+            var content = new FormUrlEncodedContent(new[] {
+            new KeyValuePair<string, string>("uid", uid),
+            new KeyValuePair<string, string>("userkey", Key),
+            });
 
-        //private string GET(string Url, string Data)
-        //{
-        //    WebRequest req = WebRequest.Create(Url + "?" + Data);
-        //    WebResponse resp = req.GetResponse();
-        //    Stream stream = resp.GetResponseStream();
-        //    StreamReader sr = new StreamReader(stream);
-        //    string Out = sr.ReadToEnd();
-        //    sr.Close();
-        //    return Out;
-        //}
+            var result = client.PostAsync("/post", content).Result;
+            string resultContent = result.Content.ReadAsStringAsync().Result;
+            var res = JsonConvert.DeserializeObject<Plagiarism>(resultContent);
+            double unique = res.uniq;
+        }
+
     }
 }

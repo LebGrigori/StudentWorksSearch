@@ -88,6 +88,7 @@ namespace StudentWorksSearch.Engines
             };
             db.Files.Add(file);
             db.SaveChanges();
+
             db.Work.Add(new Work
             {
                 Date = DateTime.Now,
