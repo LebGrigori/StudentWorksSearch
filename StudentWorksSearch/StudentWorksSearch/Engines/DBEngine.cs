@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using StudentWorksSearch.Repo;
 
 namespace StudentWorksSearch.Engines
 {
@@ -35,6 +36,23 @@ namespace StudentWorksSearch.Engines
 
             List<string> DISList = new List<string>();
             return DISList = query.Select(a => a).ToList();
+        }
+
+        public void GetWorkInfo(string selection)
+        {
+            string[] splt;
+            splt = selection.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries);
+            int id = Convert.ToInt32(splt[0]);
+
+            var query =
+                      from W in db.Work
+                      where W.Id == id
+                      select new { W.Name, W.Authors, W.Discipline, W.Description, W.Files, W.Plagiarism };
+
+            foreach (var work in query)
+            {
+                Repository.Work = new WorkData(work.Name, work.Authors, work.Discipline.Name, work.Description, work.Files.Id, work.Plagiarism, work.Files.Path);
+            }
         }
 
     }

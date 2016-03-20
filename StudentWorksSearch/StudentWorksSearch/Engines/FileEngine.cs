@@ -17,7 +17,7 @@ namespace StudentWorksSearch.Engines
         SearchWorkEntities db = new SearchWorkEntities();
 
 
-        public static string GetDocText(string docfile)
+        public string GetDocText(string docfile)
         {
             Object filename = docfile;
             Object confirmConversions = Type.Missing;
@@ -94,7 +94,7 @@ namespace StudentWorksSearch.Engines
             db.Files.Add(file);
             db.SaveChanges();
 
-            db.Work.Add(new Work
+            var work = new Work
             {
                 Date = DateTime.Now,
                 Descipline = dis + 1,
@@ -106,12 +106,13 @@ namespace StudentWorksSearch.Engines
                 Name = name,
                 Description = comm
 
-            });
+            };
+            db.Work.Add(work);
             db.SaveChanges();
 
             return new LuceneSearch.FileToIndex
             {
-                Id = file.Id,
+                Id = work.Id,
                 Text = GetDocText(Path.GetFullPath(file.Path)),
                 Description = comm,
                 Authors = auth,

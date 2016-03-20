@@ -58,7 +58,7 @@
             </StackPanel>
         </Border>
 
-        <ListBox Name="lstboxResult" Grid.Row="2" Margin="5"  ></ListBox>
+        <ListBox Name="lstboxResult" SelectionChanged="lstboxResult_SelectionChanged" Grid.Row="2" Margin="5"  ></ListBox>
 
         <Border Margin="5" Grid.Row="3" Background="LightGray">
             <Grid>
@@ -74,9 +74,12 @@
                 </Grid.ColumnDefinitions>
                 
                 <TextBlock Margin="3">Название:</TextBlock>
+                <TextBlock Name="txtName" Grid.Column="1"></TextBlock>
                 <TextBlock Margin="3" Grid.Row="1">Авторы:</TextBlock>
+                <TextBlock Name="txtAuth" Grid.Row="1" Grid.Column="1"></TextBlock>
                 <TextBlock Margin="3" Grid.Row="2">Предмет:</TextBlock>
-                <TextBox Grid.Row="3" Grid.ColumnSpan="2" Margin="5" IsEnabled="False" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap"></TextBox>
+                <TextBlock Name="txtDis" Grid.Row="2" Grid.Column="1"></TextBlock>
+                <TextBox Name="txtDes" Grid.Row="3" Grid.ColumnSpan="2" Margin="5" IsEnabled="False" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap"></TextBox>
 
             </Grid>
         </Border>

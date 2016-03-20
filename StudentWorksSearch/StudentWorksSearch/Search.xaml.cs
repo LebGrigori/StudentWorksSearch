@@ -49,7 +49,12 @@ namespace StudentWorksSearch
        // все что понадобится и может быть связано с папкой  lucene
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-           LuceneEngine le = new LuceneEngine();
+            txtAuth.Text = "";
+            txtDis.Text = "";
+            txtName.Text = "";
+            txtDes.Text = "";
+
+            LuceneEngine le = new LuceneEngine();
 
 
             int number;//количество результатов
@@ -69,7 +74,7 @@ namespace StudentWorksSearch
             lstboxResult.Items.Clear();
             foreach (var doc in results)
             {
-                lstboxResult.Items.Add(doc.Title);
+                lstboxResult.Items.Add(doc.Id+" "+doc.Title);
             }
         }
 
@@ -82,12 +87,25 @@ namespace StudentWorksSearch
         private void DownloadWork_Click(object sender, RoutedEventArgs e)
         {
             var engine = new FileEngine();
-            engine.Save(lstboxResult.SelectedItem.ToString()); 
+            engine.Save(Repository.Work.Filepath); 
         }
 
         private void btnPlagCheck_Click(object sender, RoutedEventArgs e)
         {
             new PlagiarismCheck().ShowDialog();
+        }
+
+        private void lstboxResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lstboxResult.SelectedIndex != -1)
+            {
+                var engine = new DBEngine();
+                engine.GetWorkInfo(lstboxResult.SelectedItem.ToString());
+                txtAuth.Text = Repository.Work.Auth;
+                txtDis.Text = Repository.Work.Dis;
+                txtName.Text = Repository.Work.Name;
+                txtDes.Text = Repository.Work.Descript;
+            }
         }
     }
 }

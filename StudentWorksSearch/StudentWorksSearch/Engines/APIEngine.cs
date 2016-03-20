@@ -21,7 +21,7 @@ namespace StudentWorksSearch.Engines
 
         }
 
-        public static void POST(string txt)
+        public string POST(string txt)
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri("http://api.text.ru");
@@ -33,10 +33,10 @@ namespace StudentWorksSearch.Engines
             var result = client.PostAsync("/post", content).Result;
             string resultContent = result.Content.ReadAsStringAsync().Result;
             var res = JsonConvert.DeserializeObject<UID>(resultContent);
-            GET(res.uid);
+            return GET(res.uid).ToString();
         }
 
-        public static double GET(string uid)
+        public double GET(string uid)
         {
             bool t = true;
             double unique;

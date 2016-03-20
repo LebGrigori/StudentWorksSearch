@@ -36,7 +36,7 @@ namespace StudentWorksSearch
                 LuceneSearch.LuceneEngine le = new LuceneSearch.LuceneEngine();
                var engine = new FileEngine();
                 
-                if (txtboxName.Text != "" && cmbboxDis.SelectedIndex != -1)
+                if (txtboxName.Text != "" && cmbboxDis.SelectedIndex != -1 && btnFile.Content.ToString() != "Выбрать файл")
                 {
                    var IndexMe= engine.AddFile(txtboxName.Text, cmbboxDis.SelectedIndex, txtboxAuth.Text, txtboxTags.Text, txtboxComment.Text);
                     le.BuildIndex(IndexMe);//index this file

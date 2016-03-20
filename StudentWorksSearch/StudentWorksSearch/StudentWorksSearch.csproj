@@ -160,6 +160,7 @@
     </Compile>
     <Compile Include="Repo\Repository.cs" />
     <Compile Include="Repo\UserData.cs" />
+    <Compile Include="Repo\WorkData.cs" />
     <Compile Include="Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
@@ -238,6 +239,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Отчет.docx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -276,12 +278,9 @@
     <Resource Include="img\Edit.png" />
     <Resource Include="img\Info.png" />
     <Resource Include="img\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="img\Check.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>

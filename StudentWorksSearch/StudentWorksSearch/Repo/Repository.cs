@@ -44,5 +44,12 @@ namespace StudentWorksSearch
             set { uid = value; }
         }
 
+        private static WorkData work;
+        public static WorkData Work
+        {
+            get { return work; }
+            set { work = value; }
+        }
+
     }
 }

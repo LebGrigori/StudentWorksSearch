@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using StudentWorksSearch.Engines;
+using StudentWorksSearch.Repo;
+using System.IO;
 
 namespace StudentWorksSearch
 {
@@ -23,6 +26,14 @@ namespace StudentWorksSearch
         {
             InitializeComponent();
             progressBar.IsIndeterminate = true;
+            //var engineFile = new FileEngine();
+            //var engineAPI = new APIEngine();
+            //string dir = new FileInfo(Repository.Work.Filepath).DirectoryName;
+            //string str = new FileInfo(Repository.Work.Filepath).Name;
+            //string full = Path.Combine("../../../Data/DBDocs", str)
+            //string text = engineFile.GetDocText(full);
+            //txtPlag.Text = engineAPI.POST(text);
+            //progressBar.IsIndeterminate = false;
         }
     }
 }
