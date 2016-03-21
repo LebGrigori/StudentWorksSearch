@@ -4,10 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="12cf0220db9e4a41996a994349720dc7" Name="Diagram1">
+      <Diagram DiagramId="11f075ef702740bf89ec6075879916cb" Name="Diagram1">
         <EntityTypeShape EntityType="SearchWorkModel.Discipline" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SearchWorkModel.Files" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SearchWorkModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SearchWorkModel.University" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SearchWorkModel.Users" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SearchWorkModel.Work" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />

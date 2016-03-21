@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StudentWorksSearch.Engines.DTO;
 using System.Threading;
+using System.Windows;
 
 namespace StudentWorksSearch.Engines
 {
@@ -71,17 +72,26 @@ namespace StudentWorksSearch.Engines
 
         public void StartCheck()
         {
-            var engineFile = new FileEngine();
-            string text;
-            double p;
-            var t = Task.Factory.StartNew(() =>
-            {
-                text = engineFile.GetDocText(Path.GetFullPath(Repository.Work.Filepath));
-                p = POST(text);
-                if (CheckReady != null)
-                    CheckReady(p.ToString());
-            }); 
-            
+                var engineFile = new FileEngine();
+                string text;
+                double p;
+                var t = Task.Factory.StartNew(() =>
+                {
+                    try
+                    {
+                        text = engineFile.GetDocText(Path.GetFullPath(Repository.Work.Filepath));
+                        p = POST(text);
+                        if (CheckReady != null)
+                            CheckReady(p.ToString() + "%");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Текст не был проверен по какой-то причине.\nПроверьте подключение к интернету и размер текстового файла(>100 символов).", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        if (CheckReady != null)
+                            CheckReady("Текст не проверен.");
+                    }
+                });
+                    
         }
     }
 }

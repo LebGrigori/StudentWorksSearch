@@ -34,7 +34,7 @@ namespace StudentWorksSearch
 
         private void SearchInvoke(string res)
         {
-            txtPlag.Dispatcher.Invoke(() => txtPlag.Text = res + "%");
+            txtPlag.Dispatcher.Invoke(() => txtPlag.Text = res);
             txtHead.Dispatcher.Invoke(() => txtHead.Text = "Проверка завершена");
             progressBar.Dispatcher.Invoke(() => progressBar.IsIndeterminate = false);
         }
