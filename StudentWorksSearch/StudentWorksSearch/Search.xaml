@@ -74,11 +74,11 @@
                 </Grid.ColumnDefinitions>
                 
                 <TextBlock Margin="3">Название:</TextBlock>
-                <TextBlock Name="txtName" Grid.Column="1"></TextBlock>
+                <TextBlock Name="txtName" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
                 <TextBlock Margin="3" Grid.Row="1">Авторы:</TextBlock>
-                <TextBlock Name="txtAuth" Grid.Row="1" Grid.Column="1"></TextBlock>
+                <TextBlock Name="txtAuth" Grid.Row="1" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
                 <TextBlock Margin="3" Grid.Row="2">Предмет:</TextBlock>
-                <TextBlock Name="txtDis" Grid.Row="2" Grid.Column="1"></TextBlock>
+                <TextBlock Name="txtDis" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1"></TextBlock>
                 <TextBox Name="txtDes" Grid.Row="3" Grid.ColumnSpan="2" Margin="5" IsEnabled="False" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap"></TextBox>
 
             </Grid>

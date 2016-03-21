@@ -85,7 +85,14 @@ namespace StudentWorksSearch
                     if (txtboxLogIn.Text != "" && txtboxMail.Text != "")
                     {
                         var engine = new UserEngine(txtboxLogIn.Text, "");
+                    if (cmbboxUni.SelectedIndex != -1)
+                    {
                         engine.UpdUserData(txtboxMail.Text, txtboxName.Text, cmbboxUni.SelectedItem.ToString());
+                    }
+                    else
+                    {
+                        engine.UpdUserData(txtboxMail.Text, txtboxName.Text, null);
+                    }
                         this.Close();
                     }
                     else
