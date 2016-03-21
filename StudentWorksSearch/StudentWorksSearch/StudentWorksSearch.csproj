@@ -121,16 +121,37 @@
     <Compile Include="AddWork.xaml.cs">
       <DependentUpon>AddWork.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Discipline.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Engines\APIEngine.cs" />
     <Compile Include="Engines\DBEngine.cs" />
     <Compile Include="Engines\DTO\Plagiarism.cs" />
     <Compile Include="Engines\DTO\UID.cs" />
     <Compile Include="Engines\FileEngine.cs" />
+    <Compile Include="Files.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="GradeWork.xaml.cs">
       <DependentUpon>GradeWork.xaml</DependentUpon>
     </Compile>
     <Compile Include="LuceneSearch\LuceneEngine.cs" />
     <Compile Include="LuceneSearch\FileToIndex.cs" />
+    <Compile Include="Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
     <Compile Include="PlagiarismCheck.xaml.cs">
       <DependentUpon>PlagiarismCheck.xaml</DependentUpon>
     </Compile>
@@ -144,6 +165,18 @@
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
     <Compile Include="Engines\UserEngine.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="University.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Work.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Page Include="AddWork.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,6 +228,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="App.Config" />
     <None Include="Data\DBDocs\Ёжик.docx" />
     <None Include="Data\DBDocs\Весна.doc" />
     <None Include="Data\DBDocs\Взоопарке.docx" />
@@ -216,6 +250,13 @@
     <None Include="Data\lucene_index1\_m.tii" />
     <None Include="Data\lucene_index1\_m.tis" />
     <None Include="Empty BD BackUp\SearchWork.bak" />
+    <EntityDeploy Include="Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -272,6 +313,16 @@
     </Content>
     <Content Include="Empty BD BackUp\SearchWork_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
