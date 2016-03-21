@@ -195,6 +195,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Empty BD BackUp\SearchWork.bak" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -243,6 +244,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\Check.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Empty BD BackUp\Example DOCs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Empty BD BackUp\SearchWork.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Empty BD BackUp\SearchWork_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

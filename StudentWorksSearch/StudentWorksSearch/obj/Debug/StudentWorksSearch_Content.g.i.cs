@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model.context.tt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("empty%20bd%20backup/searchwork.mdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("empty%20bd%20backup/searchwork_log.ldf")]
 
 

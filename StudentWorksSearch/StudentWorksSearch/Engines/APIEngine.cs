@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using StudentWorksSearch.Engines.DTO;
+using System.Threading;
 
 namespace StudentWorksSearch.Engines
 {
@@ -59,6 +60,7 @@ namespace StudentWorksSearch.Engines
                 if (error == 181)
                 {
                     t = false;
+                    Thread.Sleep(10000);
                 }
                 else
                     t = true;
