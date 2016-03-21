@@ -43,7 +43,7 @@ namespace StudentWorksSearch.LuceneSearch
         {
             using (var analyzer = new Lucene.Net.Analysis.Ru.RussianAnalyzer(Version.LUCENE_30))
             {
-                using (IndexWriter idxw = new IndexWriter(_directory, analyzer, false, IndexWriter.MaxFieldLength.UNLIMITED))
+                using (IndexWriter idxw = new IndexWriter(_directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED))
                 {
                     //check if document exists, if true deletes existing
                     
