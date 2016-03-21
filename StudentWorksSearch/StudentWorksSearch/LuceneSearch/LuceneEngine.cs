@@ -59,9 +59,7 @@ namespace StudentWorksSearch.LuceneSearch
                     doc.Add(new Field("Hashtags", file.Hashtags, Field.Store.YES, Field.Index.ANALYZED));
                     doc.Add(new Field("Discipline", file.Discipline, Field.Store.YES, Field.Index.ANALYZED));
                     //write the document to the index
-                    idxw.AddDocument(doc);
-                    
-
+                    idxw.AddDocument(doc);                   
                     //optimize and close the writer
                     idxw.Commit();
                     
@@ -70,12 +68,6 @@ namespace StudentWorksSearch.LuceneSearch
                 }
             }
         }
-
-        //public int CountDocs()
-        //{
-        //    var reader = IndexReader.Open(_directory, true);
-        //    return reader.NumDocs();
-        //}
 
         public  IEnumerable<FileToIndex> Search(string input, out int count, string fieldName = "")
         {
@@ -182,17 +174,17 @@ namespace StudentWorksSearch.LuceneSearch
             return samples;
         }
 
-        //deleting index
-        public  void DeleteIndex(int id)
-        {
-            using (var analyzer = new Lucene.Net.Analysis.Ru.RussianAnalyzer(Version.LUCENE_30))
-            using (var writer = new IndexWriter(_directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED))
-            {
-                var searchQuery = new TermQuery(new Term("Id", id.ToString()));
-                writer.DeleteDocuments(searchQuery);
-                writer.Commit();
-            }
-        }
+        ////deleting index
+        //public  void DeleteIndex(int id)
+        //{
+        //    using (var analyzer = new Lucene.Net.Analysis.Ru.RussianAnalyzer(Version.LUCENE_30))
+        //    using (var writer = new IndexWriter(_directory, analyzer, IndexWriter.MaxFieldLength.UNLIMITED))
+        //    {
+        //        var searchQuery = new TermQuery(new Term("Id", id.ToString()));
+        //        writer.DeleteDocuments(searchQuery);
+        //        writer.Commit();
+        //    }
+        //}
 
         public int CountDocs()
         {

@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 namespace StudentWorksSearch
 {
     /// <summary>
-    /// Interaction logic for GradeWork.xaml
+    /// Логика взаимодействия для GradeWork.xaml
     /// </summary>
     public partial class GradeWork : Window
     {

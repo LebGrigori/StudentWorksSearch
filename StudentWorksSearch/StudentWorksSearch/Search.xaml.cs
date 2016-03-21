@@ -63,7 +63,6 @@ namespace StudentWorksSearch
 
                     LuceneEngine le = new LuceneEngine();
 
-
                     int number;//количество результатов
                     string field = "";
                     IEnumerable<FileToIndex> results;
