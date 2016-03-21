@@ -45,12 +45,12 @@ namespace StudentWorksSearch
                 }
                 else
                     MessageBox.Show("Вы ввели не все данные!", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+        }
             catch (Exception ex)
             {
-                MessageBox.Show("Вы не выбрали файл!" +ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
+}
 
         private void btnFile_Click(object sender, RoutedEventArgs e)
         {

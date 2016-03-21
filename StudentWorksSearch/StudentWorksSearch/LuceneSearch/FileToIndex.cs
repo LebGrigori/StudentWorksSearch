@@ -14,5 +14,6 @@ namespace StudentWorksSearch.LuceneSearch
         public string Authors { get; set; }
         public string Title { get; set; }
         public string Hashtags { get; set; }
+        public string Discipline { get; set; }
     }
 }

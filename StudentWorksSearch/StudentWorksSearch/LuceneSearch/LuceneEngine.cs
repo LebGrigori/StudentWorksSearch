@@ -57,6 +57,7 @@ namespace StudentWorksSearch.LuceneSearch
                     doc.Add(new Field("Authors", file.Authors, Field.Store.YES, Field.Index.ANALYZED));
                     doc.Add(new Field("Text", file.Text, Field.Store.YES, Field.Index.ANALYZED));
                     doc.Add(new Field("Hashtags", file.Hashtags, Field.Store.YES, Field.Index.ANALYZED));
+                    doc.Add(new Field("Discipline", file.Discipline, Field.Store.YES, Field.Index.ANALYZED));
                     //write the document to the index
                     idxw.AddDocument(doc);
                     
@@ -118,7 +119,7 @@ namespace StudentWorksSearch.LuceneSearch
                 else
                 {
                     var parser = new MultiFieldQueryParser
-                        (Version.LUCENE_30, new[] { "Title", "Authors", "Description", "Text" }, analyzer);
+                        (Version.LUCENE_30, new[] { "Title", "Authors", "Description", "Text", "Discipline" }, analyzer);
                     var queryForField = parseQuery(keywords, parser);
                     var docs = searcher.Search(queryForField, null, 100, Sort.RELEVANCE);
                     count = docs.TotalHits;

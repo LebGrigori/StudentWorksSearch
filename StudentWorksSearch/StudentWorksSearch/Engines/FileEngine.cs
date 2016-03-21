@@ -111,6 +111,8 @@ namespace StudentWorksSearch.Engines
             db.Work.Add(work);
             db.SaveChanges();
 
+            var disc = db.Discipline.Where(c => c.Id == dis + 1).Select(c => c.Name);
+
             return new LuceneSearch.FileToIndex
             {
                 Id = work.Id,
@@ -118,7 +120,9 @@ namespace StudentWorksSearch.Engines
                 Description = comm,
                 Authors = auth,
                 Title = name,
-                Hashtags = tags
+                Hashtags = tags,
+                Discipline = disc.ToArray()[0]
+           
             };
         }
 
