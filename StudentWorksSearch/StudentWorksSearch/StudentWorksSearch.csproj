@@ -284,6 +284,8 @@
     <Resource Include="img\Check.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Data\DBDocs\" />
+    <Folder Include="Data\lucene_index1\" />
     <Folder Include="Empty BD BackUp\Example DOCs\" />
   </ItemGroup>
   <ItemGroup>

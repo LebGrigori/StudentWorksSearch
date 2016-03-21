@@ -51,34 +51,39 @@ namespace StudentWorksSearch
        // все что понадобится и может быть связано с папкой  lucene
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            txtAuth.Text = "";
-            txtDis.Text = "";
-            txtName.Text = "";
-            txtDes.Text = "";
+            var engine = new DBEngine();
+            
+            if (engine.CheckWorks())
+            {
+                txtAuth.Text = "";
+                txtDis.Text = "";
+                txtName.Text = "";
+                txtDes.Text = "";
 
-            LuceneEngine le = new LuceneEngine();
+                LuceneEngine le = new LuceneEngine();
 
 
-            int number;//количество результатов
+                int number;//количество результатов
                 string field = "";
-            IEnumerable<FileToIndex> results;
-            if (txtboxSearch.Text.StartsWith("#"))
-            {
-                field = "Hashtags";
-                results = le.Search(txtboxSearch.Text.Substring(1, txtboxSearch.Text.Length - 1),
-                    out number, field);
-            }
-            else
-            {
-                results = le.Search(txtboxSearch.Text,
-                    out number);           
-            }
-            lstboxResult.Items.Clear();
-            foreach (var doc in results)
-            {
-                lstboxResult.Items.Add(doc.Id+" "+doc.Title);
-                btnPlagCheck.IsEnabled = true;
-                DownloadWork.IsEnabled = true;
+                IEnumerable<FileToIndex> results;
+                if (txtboxSearch.Text.StartsWith("#"))
+                {
+                    field = "Hashtags";
+                    results = le.Search(txtboxSearch.Text.Substring(1, txtboxSearch.Text.Length - 1),
+                        out number, field);
+                }
+                else
+                {
+                    results = le.Search(txtboxSearch.Text,
+                        out number);
+                }
+                lstboxResult.Items.Clear();
+                foreach (var doc in results)
+                {
+                    lstboxResult.Items.Add(doc.Id + " " + doc.Title);
+                    btnPlagCheck.IsEnabled = true;
+                    DownloadWork.IsEnabled = true;
+                }
             }
         }
 

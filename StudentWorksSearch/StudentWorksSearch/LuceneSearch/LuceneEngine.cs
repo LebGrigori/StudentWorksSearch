@@ -21,7 +21,7 @@ namespace StudentWorksSearch.LuceneSearch
 
         //this part taken from http://www.codeproject.com/Articles/320219/Lucene-Net-ultra-fast-search-for-MVC-or-WebForms
         //START
-          private const string _luceneDir = "../../../Data/lucene_index1";
+          private const string _luceneDir = "../../Data/lucene_index1";
  //       private const string _luceneDir = "../../../Data/lucene_index";
         private   FSDirectory _directoryTemp;
         private    FSDirectory _directory

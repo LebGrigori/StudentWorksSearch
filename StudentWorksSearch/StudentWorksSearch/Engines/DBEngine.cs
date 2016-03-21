@@ -54,6 +54,20 @@ namespace StudentWorksSearch.Engines
                 Repository.Work = new WorkData(work.Name, work.Authors, work.Discipline.Name, work.Description, work.Files.Id, work.Plagiarism, work.Files.Path);
             }
         }
+        
+        public bool CheckWorks()
+        {
+            var query =
+                      from W in db.Work
+                      select W.Id;
+
+            List<int> WList = new List<int>();
+            WList = query.Select(a => a).ToList();
+            if (WList.Count == 0)
+                return false;
+            else
+                return true;
+        }
 
     }
 }
