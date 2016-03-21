@@ -194,5 +194,11 @@ namespace StudentWorksSearch.LuceneSearch
             }
         }
 
+        public int CountDocs()
+        {
+            var reader = IndexReader.Open(_directory, true);
+            return reader.NumDocs();
+        }
+
     }
 }

@@ -84,7 +84,7 @@ namespace StudentWorksSearch.Engines
                         if (CheckReady != null)
                             CheckReady(p.ToString() + "%");
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         MessageBox.Show("Текст не был проверен по какой-то причине.\nПроверьте подключение к интернету и размер текстового файла(>100 символов).", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
                         if (CheckReady != null)

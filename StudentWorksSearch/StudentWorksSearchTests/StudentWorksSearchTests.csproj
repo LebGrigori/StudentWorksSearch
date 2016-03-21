@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C1795761-5710-4D3A-B2DF-240A0FA3463D}</ProjectGuid>
+    <ProjectGuid>{A27EE9B0-2514-4391-A2BF-943D06819678}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StudentWorkSearch.Test</RootNamespace>
-    <AssemblyName>StudentWorkSearch.Test</AssemblyName>
+    <RootNamespace>StudentWorksSearchTests</RootNamespace>
+    <AssemblyName>StudentWorksSearchTests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -16,6 +16,7 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,13 +51,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Engines\UserEngineTests.cs" />
+    <Compile Include="Engines\DBEngineTests.cs" />
     <Compile Include="LuceneSearch\LuceneEngineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StudentWorksSearch\StudentWorksSearch.csproj">
-      <Project>{f107be94-0a59-41d8-8ed4-e44771e8246a}</Project>
+      <Project>{F107BE94-0A59-41D8-8ED4-E44771E8246A}</Project>
       <Name>StudentWorksSearch</Name>
     </ProjectReference>
   </ItemGroup>

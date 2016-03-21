@@ -10,7 +10,7 @@ using StudentWorksSearch.Repo;
 
 namespace StudentWorksSearch.Engines
 {
-    class DBEngine
+    public class DBEngine
     {
         SearchWorkEntities db = new SearchWorkEntities();
 

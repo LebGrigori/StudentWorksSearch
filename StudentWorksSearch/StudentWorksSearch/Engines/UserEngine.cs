@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using StudentWorksSearch.Repo;
 
-namespace StudentWorksSearch
+namespace StudentWorksSearch.Engines
 {
-    class UserEngine
+    public class UserEngine
     {
         SearchWorkEntities db = new SearchWorkEntities();
 
