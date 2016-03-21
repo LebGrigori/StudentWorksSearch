@@ -52,38 +52,44 @@ namespace StudentWorksSearch
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             var engine = new DBEngine();
-            
-            if (engine.CheckWorks())
+            try
             {
-                txtAuth.Text = "";
-                txtDis.Text = "";
-                txtName.Text = "";
-                txtDes.Text = "";
-
-                LuceneEngine le = new LuceneEngine();
-
-
-                int number;//количество результатов
-                string field = "";
-                IEnumerable<FileToIndex> results;
-                if (txtboxSearch.Text.StartsWith("#"))
+                if (engine.CheckWorks())
                 {
-                    field = "Hashtags";
-                    results = le.Search(txtboxSearch.Text.Substring(1, txtboxSearch.Text.Length - 1),
-                        out number, field);
+                    txtAuth.Text = "";
+                    txtDis.Text = "";
+                    txtName.Text = "";
+                    txtDes.Text = "";
+
+                    LuceneEngine le = new LuceneEngine();
+
+
+                    int number;//количество результатов
+                    string field = "";
+                    IEnumerable<FileToIndex> results;
+                    if (txtboxSearch.Text.StartsWith("#"))
+                    {
+                        field = "Hashtags";
+                        results = le.Search(txtboxSearch.Text.Substring(1, txtboxSearch.Text.Length - 1),
+                            out number, field);
+                    }
+                    else
+                    {
+                        results = le.Search(txtboxSearch.Text,
+                            out number);
+                    }
+                    lstboxResult.Items.Clear();
+                    foreach (var doc in results)
+                    {
+                        lstboxResult.Items.Add(doc.Id + " " + doc.Title);
+                        btnPlagCheck.IsEnabled = true;
+                        DownloadWork.IsEnabled = true;
+                    }
                 }
-                else
-                {
-                    results = le.Search(txtboxSearch.Text,
-                        out number);
-                }
-                lstboxResult.Items.Clear();
-                foreach (var doc in results)
-                {
-                    lstboxResult.Items.Add(doc.Id + " " + doc.Title);
-                    btnPlagCheck.IsEnabled = true;
-                    DownloadWork.IsEnabled = true;
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Поиск не может быть проведен.\n" + ex,"Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
