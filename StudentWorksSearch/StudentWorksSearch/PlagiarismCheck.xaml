@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentWorksSearch"
         mc:Ignorable="d"
-        Title="PlagiarismCheck" Height="160" Width="300">
+        Title="Проверка плагиата" Height="160" MaxHeight="160" MinHeight="160" Width="300" MinWidth="200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

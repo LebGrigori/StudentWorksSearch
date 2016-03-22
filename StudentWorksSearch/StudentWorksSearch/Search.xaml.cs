@@ -51,6 +51,8 @@ namespace StudentWorksSearch
        // все что понадобится и может быть связано с папкой  lucene
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
+            btnPlagCheck.IsEnabled = false;
+            DownloadWork.IsEnabled = false;
             var engine = new DBEngine();
             try
             {
@@ -81,8 +83,6 @@ namespace StudentWorksSearch
                     foreach (var doc in results)
                     {
                         lstboxResult.Items.Add(doc.Id + " " + doc.Title);
-                        btnPlagCheck.IsEnabled = true;
-                        DownloadWork.IsEnabled = true;
                     }
                 }
             }
@@ -113,6 +113,8 @@ namespace StudentWorksSearch
         {
             if (lstboxResult.SelectedIndex != -1)
             {
+                btnPlagCheck.IsEnabled = true;
+                DownloadWork.IsEnabled = true;
                 var engine = new DBEngine();
                 engine.GetWorkInfo(lstboxResult.SelectedItem.ToString());
                 txtAuth.Text = Repository.Work.Auth;
