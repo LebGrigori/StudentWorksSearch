@@ -5,8 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentWorksSearch"
         mc:Ignorable="d"
-        Title="GradeWork" Height="300" Width="300">
+        Title="Grade and comment" Height="300" Width="300">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+        <TextBlock  Grid.ColumnSpan="10">Добавить комментарий и оценку</TextBlock>
+        <TextBox Name="CommentText" Grid.Row="2" Grid.ColumnSpan="10" Text="Добавить комментарий..."
+                 GotFocus="TextBox_Focus" ></TextBox>
+        <Button Name="AddCommentButton" Click="AddCommentButton_Click"
+                Grid.Row="3" Grid.ColumnSpan="10">Добавить</Button>
+        <RadioButton Name="g1" Grid.Row="1" GroupName="Grade"  HorizontalAlignment="Center" VerticalAlignment="Center">1</RadioButton>
+        <RadioButton Name="g2" Grid.Row="1"  GroupName="Grade" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,15,0,14">2</RadioButton>
+        <RadioButton Name="g3" Grid.Row="1"  GroupName="Grade" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2">3</RadioButton>
+        <RadioButton Name="g4" Grid.Row="1"  GroupName="Grade" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="3">4</RadioButton>
+        <RadioButton Name="g5" Grid.Row="1" GroupName="Grade"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="4">5</RadioButton>
+        <RadioButton Name="g6" Grid.Row="1" GroupName="Grade"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="5">6</RadioButton>
+        <RadioButton Name="g7" Grid.Row="1"  GroupName="Grade" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="6">7</RadioButton>
+        <RadioButton Name="g8" Grid.Row="1"  GroupName="Grade" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="7">8</RadioButton>
+        <RadioButton Name="g9" Grid.Row="1"  GroupName="Grade" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="8">9</RadioButton>
+        <RadioButton Name="g10" Grid.Row="1" GroupName="Grade" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="9">10</RadioButton>
+
+
+
+
     </Grid>
 </Window>

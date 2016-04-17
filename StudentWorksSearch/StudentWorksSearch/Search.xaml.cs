@@ -64,6 +64,7 @@ namespace StudentWorksSearch
                     txtDes.Text = "";
 
                     LuceneEngine le = new LuceneEngine();
+                    //var c = le.CountDocs();
 
                     int number;//количество результатов
                     string field = "";
