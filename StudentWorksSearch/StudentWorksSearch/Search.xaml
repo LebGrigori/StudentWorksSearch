@@ -12,6 +12,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="200"/>
             <RowDefinition Height="Auto"/>
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -42,6 +43,7 @@
                         <Image Source="img/Info.png"></Image>
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="Мои файлы"  Name="btnMyFiles" Click="btnMyFiles_Click" ></MenuItem>
                 <MenuItem Name="btnEdit" Click="btnEdit_Click" Header="Редактировать информацию">
                     <MenuItem.Icon>
                         <Image Source="img/Edit.png"></Image>

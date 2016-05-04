@@ -124,5 +124,10 @@ namespace StudentWorksSearch
                 txtDes.Text = Repository.Work.Descript;
             }
         }
+
+        private void btnMyFiles_Click(object sender, RoutedEventArgs e)
+        {
+            //и что дальше? кек
+        }
     }
 }

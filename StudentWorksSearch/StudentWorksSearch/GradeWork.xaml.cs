@@ -34,7 +34,7 @@ namespace StudentWorksSearch
             var selected = buttons.FirstOrDefault(x => (bool)x.IsChecked);
             if (selected != null)
             {
-                string text;
+                string text="";
                 var grade = selected.Name.Remove(0, 1);
                 if (CommentText.Text != "Добавить комментарий..." && CommentText.Text != "")
                 {
