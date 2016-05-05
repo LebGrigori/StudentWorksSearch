@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentWorksSearch.Engines;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,28 +28,37 @@ namespace StudentWorksSearch
 
         private void AddCommentButton_Click(object sender, RoutedEventArgs e)
         {
-            List<RadioButton> buttons = new List<RadioButton>
+            var engine = new CommentEngine();
+            try
+            {
+                List<RadioButton> buttons = new List<RadioButton>
             {
                 g1,g2,g3,g4,g5,g6,g7,g8,g9,g10
             };
-            var selected = buttons.FirstOrDefault(x => (bool)x.IsChecked);
-            if (selected != null)
-            {
-                string text="";
-                var grade = selected.Name.Remove(0, 1);
-                if (CommentText.Text != "Добавить комментарий..." && CommentText.Text != "")
+                var selected = buttons.FirstOrDefault(x => (bool)x.IsChecked);
+                if (selected != null)
                 {
-                    text = CommentText.Text;
+                    string text = "";
+                    var grade = Convert.ToInt32(selected.Name.Remove(0, 1));
+                    if (CommentText.Text != "Добавить комментарий..." && CommentText.Text != "")
+                    {
+                        text = CommentText.Text;
+                    }
+                    //надо вытащить id работы и юзера
+                    int workId = 8;
+                    string userId = "mamaAmaCriminal";
+                    engine.AddComment(userId, workId, grade, text);
+                    this.Close();
                 }
-
-                //вот тут добавить коммент в базу данных , привязать к работе, 
-                //надо подумать как это сделать
+                else
+                {
+                    MessageBox.Show("Вы не оценили работу!", "Оценка отсутствует");
+                }
             }
-            else
+            catch(Exception exc)
             {
-                MessageBox.Show("Вы не оценили работу!", "Оценка отсутствует");
+                MessageBox.Show(exc.Message,"Возникла ошибка");
             }
-            this.Close();
         }
 
         //убирает дефолтный текст в тексбоксе коммента
